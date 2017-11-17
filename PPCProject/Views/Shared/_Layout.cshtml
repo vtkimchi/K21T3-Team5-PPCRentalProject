@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Perfpect Property Company-Rental</title>
+    @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <style>
+        .wow:first-child{
+            visibility: hidden;
+        }
+    </style>
+    <script src="~/Content/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top navbar-right" style="background-color:white">
+        <div class="container">
+            <div class="navbar-right" style="padding-top:10px;">
+                @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>*@
+            </div>
+            <div class="navbar-right" style="font-size:medium;padding-top:10px">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("PROPERTY", "Index", "Home")</li>
+                    <li>@Html.ActionLink("SEARCH", "About", "Home")</li>
+                    <li>@Html.ActionLink("ABOUT US", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("POST", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("CONTACT US", "Contact", "Home")</li>
+                </ul>
+            </div>
+            <div class="backgrounheader" style="background-image: url(Images/heading.jpg)">
+                <a href="@Url.Action("Index","Home")"><img src="~/Images/logoPPC.png" width="200px" height="70px" alt="Logo"></a>
+            </div>
+
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+        <hr class="container body-content"/>
+        <footer class="container body-content">
+            <p>&copy; @DateTime.Now.Year - PPC Rental Project - Team 5</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,120 @@
+﻿@model PPCProject.Model.PROPERTY
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container body-content">
+    <div style="font-size: large; margin-left: 0px">
+        <div class="row" style="margin-top: 20px">
+            <div class="col-sm-8">
+                <h2>@Html.DisplayFor(model => model.PropertyName)</h2>
+            </div>
+            <div class="col-sm-4" style="margin-top: 10px">
+                <h2 style=" font-size: large; color: red">
+                    <img src="~/Images/icon_money.png" />
+                    @Html.DisplayFor(model => model.Price) @Html.DisplayFor(model => model.UnitPrice)
+                    </  h2>
+            </div>
+        </div>
+        <hr style="margin-top:5px" />
+
+        <p>
+            @Html.DisplayFor(model => model.PROPERTY_TYPE.CodeType)
+        </p>
+        <p>
+            @Html.DisplayFor(model => model.STREET.StreetName),
+            @Html.DisplayFor(model => model.WARD.WardName),
+            @Html.DisplayFor(model => model.DISTRICT.DistrictName)
+        </p>
+        <hr />
+
+        <p>
+            <img src="/Images/@Model.Avatar" style="width: 500px; height: 300px" />
+        </p>
+
+        <p>
+            @Html.DisplayFor(model => model.Images)
+        </p>
+
+        <p>
+            @Html.DisplayFor(model => model.Content)
+        </p>
+        <div class="row">
+            <div class="col-xs-6">
+                <p>
+                    <h3 style="background-color: #E6E6E6; padding: 4px; text-align: center">Address</h3>
+                </p>
+                <p class="col-xs-6">
+                    @Html.DisplayNameFor(model => model.STREET.StreetName): @Html.DisplayFor(model => model.STREET.StreetName)
+                </p>
+                <p class="col-xs-6">
+                    @Html.DisplayNameFor(model => model.WARD.WardName): @Html.DisplayFor(model => model.WARD.WardName)
+                </p>
+                <p class="col-xs-6">
+                    @Html.DisplayNameFor(model => model.DISTRICT.DistrictName): @Html.DisplayFor(model => model.DISTRICT.DistrictName)
+                </p>
+            </div>
+
+            <div class="col-xs-6">
+                <p>
+                    <h3 style="background-color: #E6E6E6; padding: 4px; text-align: center">Details</h3>
+                </p>
+                <p class="col-xs-6">
+                    @Html.DisplayNameFor(model => model.Area): @Html.DisplayFor(model => model.Area)
+                </p>
+                <p class="col-xs-6">
+                    @Html.DisplayNameFor(model => model.BedRoom): @Html.DisplayFor(model => model.BedRoom)
+                </p>
+                <p class="col-xs-6">
+                    @Html.DisplayNameFor(model => model.BathRoom): @Html.DisplayFor(model => model.BathRoom)
+                </p>
+                <p class="col-xs-6">
+                    @Html.DisplayNameFor(model => model.PackingPlace): @Html.DisplayFor(model => model.PackingPlace)
+                </p>
+
+            </div>
+        </div>
+        <div>
+            <p>
+                <h3 style="text-align: center; background-color: #E6E6E6; padding: 4px">Infomation</h3>
+            </p>
+            <div class="row">
+                <div class="col-xs-6">
+                    <p>
+                        @Html.DisplayNameFor(model => model.PROJECT_STATUS.Status_Name): @Html.DisplayFor(model => model.PROJECT_STATUS.Status_Name)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(model => model.Created_at): @Html.DisplayFor(model => model.Created_at)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(model => model.Create_post): @Html.DisplayFor(model => model.Create_post)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(model => model.Updated_at): @Html.DisplayFor(model => model.Updated_at)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(model => model.Note): @Html.DisplayFor(model => model.Note)
+                    </p>
+                </div>
+
+                <div class="col-xs-6">
+                    <p>
+                        @Html.DisplayNameFor(model => model.USER.FullName): @Html.DisplayFor(model => model.USER.FullName)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(model => model.USER.Email): @Html.DisplayFor(model => model.USER.Email)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(model => model.USER1.Email): @Html.DisplayFor(model => model.USER1.Email)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index", "Home")
+    </p>
+</div>

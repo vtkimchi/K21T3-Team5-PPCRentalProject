@@ -1,0 +1,153 @@
+﻿@model IEnumerable<PPCProject.Model.PROPERTY>
+@{
+    ViewBag.Title = "";
+}
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img class="img-rounded img-responsive" src="~/Images/IMG_1592-stamp.jpg" width="100%" />
+        </div>
+        <div class="item">
+            <img class="img-rounded img-responsive" src="~/Images/PIS_4622-Edit.jpg" width="100%" />
+        </div>
+        <div class="item">
+            <img class="img-rounded img-responsive" src="~/Images/PIS_6656-Edit-stamp.jpg" width="100%" />
+        </div>
+        <div class="item">
+            <img class="img-rounded img-responsive" src="~/Images/PIS_7389-Edit-stamp.jpg" width="100%" />
+        </div>
+        <div class="item">
+            <img class="img-rounded img-responsive" src="~/Images/PIS_7432-Edit-stamp.jpg" width="100%" />
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<!-- FilterForm-->
+<div class=" wow bounceInRight ">
+    <p class="filterbox">SEARCH</p>
+
+    <div class="filter-form">
+
+        <form id="advanced_search" role="search" action="@Url.Action("Search","Home")" name="search" method="get">
+            @*<div class="col-xs-2 ">
+                    <label>Country</label>
+                    <select class="show-menu-arrow selectpicker shape">
+                        <option value="vietnam">VietNam</option>
+                    </select>
+                </div>*@
+            <div class="col-xs-2 ">
+                <label>Type</label>
+                <div class="show-menu-arrow selectpicker">
+                    @Html.DropDownList("bien1", (IEnumerable<SelectListItem>)ViewData["LoaiDA"], "All Type", new { @class = "shape" })
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="show-menu-arrow selectpicker">
+                    <label>Location</label>
+                    @Html.DropDownList("bien2", (IEnumerable<SelectListItem>)ViewData["Quan"], "All Location", new { @class = "shape" })
+                </div>
+            </div>
+            <!--   <div class="col-xs-2">
+                    <label>Ward</label>
+                    <select class="show-menu-arrow selectpicker shape">
+                        @*@Html.DropDownList("bien3", (IEnumerable<SelectListItem>)ViewData["Phuong"], new {@class="shape"})*@
+                        <option value="1">Không có</option>
+                    </select>
+                </div>
+                <div class="col-xs-2 ">
+                    <label>Street</label>
+                    <select class="show-menu-arrow selectpicker shape">
+                        @*@Html.DropDownList("streeT", (IEnumerable<SelectListItem>)ViewData["Duong"], new { @class = "shape" })*@
+                        <option value="1">Không có</option>
+                    </select>
+                </div> -->
+            <div class="col-xs-2 ">
+                <label>Bedrooms</label>
+                <select class="show-menu-arrow selectpicker shape" name="bed">
+                    <option value="0">Select Bedrooms</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="col-xs-2 ">
+                <label>Baths</label>
+                <select class="show-menu-arrow selectpicker shape" name="bath">
+                    <option value="0">Select Baths</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <!--      <div class="col-xs-2 ">
+                      <label for="min_price">Min Price</label>
+                      <select id="min_price" class="show-menu-arrow selectpicker shape" name="minprice">
+                          <option value="0">Min Price</option>
+                          <option value="1">$10000</option>
+                          <option value="2">$30000</option>
+                          <option value="3">$40000</option>
+                          <option value="4">$70000</option>
+                      </select>
+                  </div>
+                  <div class="col-xs-2 ">
+                      <label for="max_price">Max Price</label>
+                      <select id="max_price" class="show-menu-arrow selectpicker shape" name="maxprice">
+                          <option value="0">Max Price</option>
+                          <option value="1">$90000</option>
+                          <option value="2">$110000</option>
+                          <option value="3">$200000</option>
+                          <option value="4">$990000</option>
+                      </select>
+                  </div> -->
+            <div class="col-xs-2">
+                <label>Key Word</label>
+                <input type="text" class="form-control shape-text" style="width: 280px;" placeholder="Type Keyword" name="text" />
+            </div>
+            <div class="col-xs-6">
+                <button type="submit" class="btn btn-info shape-button" style="margin-left: 450px;">SEARCH PROPERTY</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- end filter form-->
+<!-- PropertyContent-->
+<div class="container body-content">
+    <h2 class="heading">LATEST LISTING</h2>
+    <hr />
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 margin-style wow fadeInUp">
+                <div class="thumbnail">
+                    <img src="/Images/@item.Avatar" alt="@item.PropertyName">
+                    <div class="caption">
+                        <h3>@item.PropertyName</h3>
+                        <p style="color: red"><img src="~/Images/icon_money.png" /> @item.Price @item.UnitPrice</p>
+                        <p><img src="~/Images/iconPlace.png" />@item.STREET.StreetName, @item.WARD.WardName,@item.DISTRICT.DistrictName</p>
+                        <p>@item.PROPERTY_TYPE.Description</p>
+                        <p>@item.Content.Substring(0, 100)...</p>
+                        <p>
+                            <span><img src="~/Images/icon_bed.png" /> (@item.BedRoom)</span>
+                            <span><img src="~/Images/icon_bath.png" />(@item.BathRoom)</span>
+                            <span><img src="~/Images/icon_area.png" />(@item.Area) </span>
+                        </p>
+                        <p><a href="/Detail/Detail/@item.ID" class="btn btn-primary" role="button" style="margin-left: 260px">Detail</a></p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
