@@ -13,10 +13,10 @@ namespace PPCProject.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DemoPPCRentalEntities2 : DbContext
+    public partial class Team35Entities : DbContext
     {
-        public DemoPPCRentalEntities2()
-            : base("name=DemoPPCRentalEntities2")
+        public Team35Entities()
+            : base("name=Team35Entities")
         {
         }
     

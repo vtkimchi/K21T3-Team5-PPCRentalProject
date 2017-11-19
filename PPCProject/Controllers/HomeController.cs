@@ -10,7 +10,7 @@ namespace PPCProject.Controllers
     public class HomeController : Controller
     {
         List<SelectListItem> type,district, ward, street;
-        DemoPPCRentalEntities2 model = new DemoPPCRentalEntities2();
+        Team35Entities model = new Team35Entities();
         public void Function()
         {
         /*new List*/

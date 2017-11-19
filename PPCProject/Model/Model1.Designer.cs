@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\US\Source\Repos\K21T3-Team5-PPCRentalProject\PPCProject\Model\ProjectPPCRental.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\ASUS\Desktop\CS4PE\Team5-PPC\PPCProject\Model\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
