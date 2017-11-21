@@ -1,10 +1,18 @@
 ﻿@model PPCProject.Model.PROPERTY
+@*@using (Html.BeginForm("Edit", "ProductAdmin", FormMethod.Post,
+                new { enctype = "multipart/form-data" }))
+{
+    
+}*@
 
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
+                       
+                
+                          
 <h2>Edit</h2>
 
 
@@ -31,14 +39,28 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Avatar)
                 @Html.ValidationMessageFor(model => model.Avatar)
+                
+               @* <input type="file" title="search image" name="file" id="file" onchange="show(this)" style="width: 100%;" /> <br />*@
             </div>
         </div>
 
         <div class="form-group">
+            @*{
+            <div>
+                First name<br />
+                @Html.TextBox("fname") <br />
+                Last name<br />
+                @Html.TextBox("lname") <br />
+                
+            </div>
+            }*@
+
             @Html.LabelFor(model => model.Images, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Images)
                 @Html.ValidationMessageFor(model => model.Images)
+               
+                
             </div>
         </div>
 
@@ -58,7 +80,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Street_ID, "Street_ID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Street_ID", new SelectList(ViewBag.street, "ID", "StreetName", Model.STREET))
@@ -80,7 +102,7 @@
                 @Html.DropDownList("District_ID", new SelectList(ViewBag.district, "ID", "DistrictName", Model.DISTRICT))
                 @Html.ValidationMessageFor(model => model.District_ID)
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
@@ -131,9 +153,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UserID, "UserID", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UserID, "User", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("UserID", new SelectList(ViewBag.user, "ID", "Email", Model.USER))
+                @Html.DropDownList("UserID", new SelectList(ViewBag.user, "ID", "FullName", Model.USER))
                 @Html.ValidationMessageFor(model => model.UserID)
             </div>
         </div>
