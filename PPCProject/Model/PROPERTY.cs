@@ -11,6 +11,7 @@ namespace PPCProject.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Web;
     
     public partial class PROPERTY
     {
@@ -60,5 +61,7 @@ namespace PPCProject.Model
         public string Image_url { get; set; }
 
         public string path { get; set; }
+        public HttpPostedFileBase AvatarFile { get; set; }
+        public HttpPostedFileBase ImageFile2 { get; set; }
     }
 }

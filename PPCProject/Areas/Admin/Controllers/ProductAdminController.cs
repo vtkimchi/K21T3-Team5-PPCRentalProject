@@ -34,22 +34,92 @@ namespace PPCProject.Areas.Admin.Controllers
             return View(product);
         }
         [HttpPost]
-        public ActionResult Edit(int id, PROPERTY p)
+        public ActionResult Edit(PROPERTY p)
         {
-            var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
+            ListAll();
+            // Images
 
-            product.Avatar = p.Avatar;
-            product.PropertyName = p.PropertyName;
-            product.Price = p.Price;
-            product.Content = p.Content;
-            product.Area = p.Area;
-            product.BedRoom = p.BedRoom;
-            product.BathRoom = p.BathRoom;
-            product.Created_at = p.Created_at;
-            product.Create_post = p.Create_post;
-            product.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+            var entity = model.PROPERTies.Find(p.ID);
+
+            string filename = Path.GetFileNameWithoutExtension(p.AvatarFile.FileName);
+            string extension = Path.GetExtension(p.AvatarFile.FileName);
+            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+
+            p.Images = filename;
+            string s = p.Images;
+            filename = Path.Combine(Server.MapPath("~/Images"), filename);
+            p.AvatarFile.SaveAs(filename);
+            // Avatar
+            //string filename2 = Path.GetFileNameWithoutExtension(property.ImageFile2.FileName);
+            //string extension2 = Path.GetExtension(property.ImageFile2.FileName);
+            //filename2 = filename2 + "Avatar" + DateTime.Now.ToString("yymmssfff") + extension2;
+            //property.Avatar = "~/Images/" + filename2;
+            //filename2 = Path.Combine(Server.MapPath("~/Images"), filename2);
+            // Save
+
+            //if (Path.GetFileNameWithoutExtension(property.ImageFile2.FileName)==null)
+            //{
+            //    string s1 = "~/ Images / AvatarNull.png";
+            //    property.ImageFile2.SaveAs(s1);
+            //    property.ImageFile.SaveAs(filename);
+            //}
+            //if (Path.GetFileNameWithoutExtension(entity.ImageFile.FileName) == null)
+            //{
+            //    string s2 = "~/Images/ImagesNull.png";
+            //    p.ImageFile.SaveAs(s2);
+            //    //property.ImageFile2.SaveAs(filename2);
+            //}
+            //else
+            //{
+            //    //property.ImageFile2.SaveAs(filename2);
+            //    p.ImageFile.SaveAs(filename);
+            //}
+            entity.PropertyName = p.PropertyName;
+
+
+            entity.Avatar = s;
+
+            //property.Avatar = p.Avatar;
+            //property.Images = p.Images;
+            entity.PropertyType_ID = p.PropertyType_ID;
+            entity.Content = p.Content;
+            entity.Street_ID = p.Street_ID;
+            entity.Ward_ID = p.Ward_ID;
+            entity.District_ID = p.District_ID;
+            entity.UnitPrice = p.UnitPrice;
+            entity.Area = p.Area;
+            entity.BedRoom = p.BedRoom;
+            entity.BathRoom = p.BathRoom;
+            entity.PackingPlace = p.PackingPlace;
+            entity.UserID = p.UserID;
+            entity.Created_at = p.Created_at;
+            entity.Create_post = p.Create_post;
+            entity.Status_ID = p.Status_ID;
+            entity.Note = p.Note;
+            entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+            entity.Sale_ID = p.Sale_ID;
+
             model.SaveChanges();
-            return RedirectToAction("Index");
+
+
+            // TODO: Add insert logic here
+
+            return RedirectToAction("Index", "ProductAdmin");
+            //   return View("Index");
+
+            // return View("Index");
+        }
+
+        public void ListAll()
+        {
+            ViewBag.property_type = model.PROPERTY_TYPE.ToList();
+            ViewBag.street = model.STREETs.OrderBy(x => x.StreetName).ToList();
+            ViewBag.ward = model.WARDs.OrderBy(x => x.WardName).ToList();
+            ViewBag.district = model.DISTRICTs.OrderBy(x => x.DistrictName).ToList();
+            ViewBag.user = model.USERs.OrderBy(x => x.FullName).ToList();
+            ViewBag.status = model.PROJECT_STATUS.OrderBy(x => x.Status_Name).ToList();
+            //ViewBag.sale = model.Sla.ToLi st();
+
         }
         [HttpGet]
         public ActionResult Create()

@@ -14,6 +14,8 @@ input,
 select,
 textarea {
     max-width: 280px;
+   width:250px;
+    height:30px;
 }
 
 /* styles for validation helpers */
@@ -43,5 +45,6 @@ input[type="checkbox"].input-validation-error {
 .heading{
 text-align: center;
 }
+
 
 
