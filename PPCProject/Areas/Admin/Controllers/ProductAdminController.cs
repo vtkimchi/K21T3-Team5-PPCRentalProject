@@ -35,38 +35,64 @@ namespace PPCProject.Areas.Admin.Controllers
         {
             ListAll();
             // Images
-
             var entity = model.PROPERTies.Find(p.ID);
 
-            string filename = Path.GetFileNameWithoutExtension(p.AvatarFile.FileName);
-            string extension = Path.GetExtension(p.AvatarFile.FileName);
-            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+            try
+            {
+              
+                string filename = Path.GetFileNameWithoutExtension(p.AvatarFile.FileName);
+                string extension = Path.GetExtension(p.AvatarFile.FileName);
+                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                p.Images = filename;
+                string s = p.Images;
+                filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                p.AvatarFile.SaveAs(filename);
+                entity.Images = p.Images;
+                entity.Avatar = s;
+                entity.PropertyName = p.PropertyName;
+                entity.PropertyType_ID = p.PropertyType_ID;
+                entity.Content = p.Content;
+                entity.Street_ID = p.Street_ID;
+                entity.Ward_ID = p.Ward_ID;
+                entity.District_ID = p.District_ID;
+                entity.UnitPrice = p.UnitPrice;
+                entity.Area = p.Area;
+                entity.BedRoom = p.BedRoom;
+                entity.BathRoom = p.BathRoom;
+                entity.PackingPlace = p.PackingPlace;
+                entity.UserID = p.UserID;
+                entity.Status_ID = p.Status_ID;
+                entity.Note = p.Note;
+                entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+                entity.Sale_ID = p.Sale_ID;
+                model.SaveChanges();
 
-            p.Images = filename;
-            string s = p.Images;
-            filename = Path.Combine(Server.MapPath("~/Images"), filename);
-            p.AvatarFile.SaveAs(filename);
-            entity.PropertyName = p.PropertyName;
+
+
+            }
+            catch (Exception)
+            {
+
             
-            entity.Avatar = s;
-
-            entity.PropertyType_ID = p.PropertyType_ID;
-            entity.Content = p.Content;
-            entity.Street_ID = p.Street_ID;
-            entity.Ward_ID = p.Ward_ID;
-            entity.District_ID = p.District_ID;
-            entity.UnitPrice = p.UnitPrice;
-            entity.Area = p.Area;
-            entity.BedRoom = p.BedRoom;
-            entity.BathRoom = p.BathRoom;
-            entity.PackingPlace = p.PackingPlace;
-            entity.UserID = p.UserID;
-            entity.Status_ID = p.Status_ID;
-            entity.Note = p.Note;
-            entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
-            entity.Sale_ID = p.Sale_ID;
-
-            model.SaveChanges();
+        
+                entity.PropertyName = p.PropertyName;
+                entity.PropertyType_ID = p.PropertyType_ID;
+                entity.Content = p.Content;
+                entity.Street_ID = p.Street_ID;
+                entity.Ward_ID = p.Ward_ID;
+                entity.District_ID = p.District_ID;
+                entity.UnitPrice = p.UnitPrice;
+                entity.Area = p.Area;
+                entity.BedRoom = p.BedRoom;
+                entity.BathRoom = p.BathRoom;
+                entity.PackingPlace = p.PackingPlace;
+                entity.UserID = p.UserID;
+                entity.Status_ID = p.Status_ID;
+                entity.Note = p.Note;
+                entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+                entity.Sale_ID = p.Sale_ID;
+                model.SaveChanges();
+            }
 
 
             // TODO: Add insert logic here

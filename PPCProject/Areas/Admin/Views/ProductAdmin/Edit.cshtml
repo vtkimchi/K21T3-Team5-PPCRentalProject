@@ -171,12 +171,11 @@
                 <div class="col-md-10">
                     @*<img src="~/Images/@Model.Avatar" width="250" /> <br><br>*@
                     <div>
-                        @using (Html.BeginForm("Edit", "ProductAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                        {
+                      
                             <input type="file" name="AvatarFile" />
                             @*@Html.EditorFor(model => model.Images, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })*@
-                        }
+                        
                     </div>
                 </div>
             </div>
