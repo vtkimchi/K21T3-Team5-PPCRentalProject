@@ -47,7 +47,7 @@ namespace PPCProject.Areas.Admin.Controllers
             product.BathRoom = p.BathRoom;
             product.Created_at = p.Created_at;
             product.Create_post = p.Create_post;
-            product.Updated_at = p.Updated_at;
+            product.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
             model.SaveChanges();
             return RedirectToAction("Index");
         }
