@@ -21,9 +21,6 @@ namespace PPCProject.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-
-
-
             var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
             ViewBag.property_type = model.PROPERTY_TYPE.OrderByDescending(x => x.ID).ToList();
             ViewBag.ward = model.WARDs.OrderByDescending(x => x.ID).ToList();
@@ -49,38 +46,10 @@ namespace PPCProject.Areas.Admin.Controllers
             string s = p.Images;
             filename = Path.Combine(Server.MapPath("~/Images"), filename);
             p.AvatarFile.SaveAs(filename);
-            // Avatar
-            //string filename2 = Path.GetFileNameWithoutExtension(property.ImageFile2.FileName);
-            //string extension2 = Path.GetExtension(property.ImageFile2.FileName);
-            //filename2 = filename2 + "Avatar" + DateTime.Now.ToString("yymmssfff") + extension2;
-            //property.Avatar = "~/Images/" + filename2;
-            //filename2 = Path.Combine(Server.MapPath("~/Images"), filename2);
-            // Save
-
-            //if (Path.GetFileNameWithoutExtension(property.ImageFile2.FileName)==null)
-            //{
-            //    string s1 = "~/ Images / AvatarNull.png";
-            //    property.ImageFile2.SaveAs(s1);
-            //    property.ImageFile.SaveAs(filename);
-            //}
-            //if (Path.GetFileNameWithoutExtension(entity.ImageFile.FileName) == null)
-            //{
-            //    string s2 = "~/Images/ImagesNull.png";
-            //    p.ImageFile.SaveAs(s2);
-            //    //property.ImageFile2.SaveAs(filename2);
-            //}
-            //else
-            //{
-            //    //property.ImageFile2.SaveAs(filename2);
-            //    p.ImageFile.SaveAs(filename);
-            //}
             entity.PropertyName = p.PropertyName;
-
-
+            
             entity.Avatar = s;
 
-            //property.Avatar = p.Avatar;
-            //property.Images = p.Images;
             entity.PropertyType_ID = p.PropertyType_ID;
             entity.Content = p.Content;
             entity.Street_ID = p.Street_ID;
@@ -92,8 +61,6 @@ namespace PPCProject.Areas.Admin.Controllers
             entity.BathRoom = p.BathRoom;
             entity.PackingPlace = p.PackingPlace;
             entity.UserID = p.UserID;
-            entity.Created_at = p.Created_at;
-            entity.Create_post = p.Create_post;
             entity.Status_ID = p.Status_ID;
             entity.Note = p.Note;
             entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
@@ -105,9 +72,6 @@ namespace PPCProject.Areas.Admin.Controllers
             // TODO: Add insert logic here
 
             return RedirectToAction("Index", "ProductAdmin");
-            //   return View("Index");
-
-            // return View("Index");
         }
 
         public void ListAll()
@@ -118,7 +82,6 @@ namespace PPCProject.Areas.Admin.Controllers
             ViewBag.district = model.DISTRICTs.OrderBy(x => x.DistrictName).ToList();
             ViewBag.user = model.USERs.OrderBy(x => x.FullName).ToList();
             ViewBag.status = model.PROJECT_STATUS.OrderBy(x => x.Status_Name).ToList();
-            //ViewBag.sale = model.Sla.ToLi st();
 
         }
         [HttpGet]
@@ -129,27 +92,7 @@ namespace PPCProject.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(PROPERTY p, HttpPostedFileBase file)
         {
-            var product = new PROPERTY();
-           
-           // string ImageName = System.IO.Path.GetFileName(file.FileName);
-            //string physicalPath = Server.MapPath("~/images/" + ImageName);
-
-            // save image in folder
-            //file.SaveAs(physicalPath);
-
-            //save new record in database
-        //    var allowedExtensions = new[] {  
-        //    ".Jpg", ".png", ".jpg", "jpeg"  
-        //}; 
-        //    product.Avatar = file.ToString();
-        //    var fileName = Path.GetFileName(file.FileName);
-            
-        //    var ext = Path.GetExtension(file.FileName);
-        //    string name = Path.GetFileNameWithoutExtension(fileName);
-        //    string myfile = name + "_" + product.ID + ext;
-        //    var path = Path.Combine(Server.MapPath("~/Images"), myfile);
-        //    product.Avatar = p.path;
-           
+            var product = new PROPERTY();      
            
             
             product.PropertyName = p.PropertyName;
@@ -163,7 +106,6 @@ namespace PPCProject.Areas.Admin.Controllers
             product.Updated_at = p.Updated_at;
             model.PROPERTies.Add(product);
             model.SaveChanges();
-          //  file.SaveAs(path);
             return RedirectToAction("Index");
         }
         [HttpGet]

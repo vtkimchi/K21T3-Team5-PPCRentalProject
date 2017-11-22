@@ -1,9 +1,4 @@
 ﻿@model PPCProject.Model.PROPERTY
-@*@using (Html.BeginForm("Edit", "ProductAdmin", FormMethod.Post,
-                new { enctype = "multipart/form-data" }))
-{
-    
-}*@
 
 @{
     ViewBag.Title = "Edit";
@@ -13,14 +8,13 @@
 <link href="~/Content/Site.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-<h2 >Edit</h2>
 
 @using (Html.BeginForm("Edit", "ProductAdmin", FormMethod.Post, new { enctype ="multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>PROPERTY</h4>
+        <h2 style="text-align: center">EDIT PROPERTY</h2>
         <hr />
 
         <div class="col-xs-6">
@@ -34,16 +28,7 @@
 
 
             <div class="form-group">
-                @*{
-                <div>
-                    First name<br />
-                    @Html.TextBox("fname") <br />
-                    Last name<br />
-                    @Html.TextBox("lname") <br />
-
-                </div>
-                }*@
-
+               
                 @Html.LabelFor(model => model.Images, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Images)
@@ -64,7 +49,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Content)
+                    @Html.TextAreaFor(model => model.Content, new { @class = "required", @cols = 40, @rows = 10 })
                     @Html.ValidationMessageFor(model => model.Content)
                 </div>
             </div>
@@ -108,7 +93,9 @@
                     @Html.ValidationMessageFor(model => model.UnitPrice)
                 </div>
             </div>
+        </div>
 
+        <div class="col-xs-6">
             <div class="form-group">
                 @Html.LabelFor(model => model.Area, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -124,9 +111,6 @@
                     @Html.ValidationMessageFor(model => model.BedRoom)
                 </div>
             </div>
-        </div>
-
-        <div class="col-xs-6">
             <div class="form-group">
                 @Html.LabelFor(model => model.BathRoom, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -151,7 +135,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.Created_at, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Created_at)
@@ -165,7 +149,7 @@
                     @Html.EditorFor(model => model.Create_post)
                     @Html.ValidationMessageFor(model => model.Create_post)
                 </div>
-            </div>
+            </div>*@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Status_ID, "Status_ID", new { @class = "control-label col-md-2" })
@@ -210,7 +194,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-5 col-md-13">
-                <input type="submit" value="Save" class="btn btn-default" />
+                @*<input type="submit" value="Save" class="btn btn-primary" style="font-size: medium; padding: 9px"/>*@
+                <button type="submit" class="btn btn-outline-primary" style="font-size: medium; width: 100px">Save</button>
             </div>
         </div>
     </div>
