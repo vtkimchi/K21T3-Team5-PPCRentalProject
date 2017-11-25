@@ -67,7 +67,33 @@ namespace PPCProject.Controllers
             ViewBag.Message = "Your contact page.";
             return View();
         }
-        
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            Function();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(PROPERTY p, HttpPostedFileBase file)
+        {
+            var product = new PROPERTY();
+
+
+            product.PropertyName = p.PropertyName;
+            product.Price = p.Price;
+            product.Content = p.Content;
+            product.Area = p.Area;
+            product.BedRoom = p.BedRoom;
+            product.BathRoom = p.BathRoom;
+            product.Created_at = p.Created_at;
+            product.Create_post = p.Create_post;
+            product.Updated_at = p.Updated_at;
+            model.PROPERTies.Add(product);
+            model.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public ActionResult Search(string text, string bien1, string bien2, string bed, string bath)
         {
