@@ -37,17 +37,9 @@ namespace PPCProject.Areas.Admin.Controllers
             // Images
             var entity = model.PROPERTies.Find(p.ID);
 
-            try
-            {
-              
-                string filename = Path.GetFileNameWithoutExtension(p.AvatarFile.FileName);
-                string extension = Path.GetExtension(p.AvatarFile.FileName);
-                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                p.Images = filename;
-                string s = p.Images;
-                filename = Path.Combine(Server.MapPath("~/Images"), filename);
-                p.AvatarFile.SaveAs(filename);
-                entity.Images = p.Images;
+            string i = UpIma(p);
+            string s = UpAva(p);
+                entity.Images = i;
                 entity.Avatar = s;
                 entity.PropertyName = p.PropertyName;
                 entity.PropertyType_ID = p.PropertyType_ID;
@@ -69,35 +61,43 @@ namespace PPCProject.Areas.Admin.Controllers
 
 
 
-            }
-            catch (Exception)
-            {
-
-            
-        
-                entity.PropertyName = p.PropertyName;
-                entity.PropertyType_ID = p.PropertyType_ID;
-                entity.Content = p.Content;
-                entity.Street_ID = p.Street_ID;
-                entity.Ward_ID = p.Ward_ID;
-                entity.District_ID = p.District_ID;
-                entity.UnitPrice = p.UnitPrice;
-                entity.Area = p.Area;
-                entity.BedRoom = p.BedRoom;
-                entity.BathRoom = p.BathRoom;
-                entity.PackingPlace = p.PackingPlace;
-                entity.UserID = p.UserID;
-                entity.Status_ID = p.Status_ID;
-                entity.Note = p.Note;
-                entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
-                entity.Sale_ID = p.Sale_ID;
-                model.SaveChanges();
-            }
-
-
+           
             // TODO: Add insert logic here
 
             return RedirectToAction("Index", "ProductAdmin");
+        }
+
+        private string UpAva(PROPERTY p)
+        {
+            string filename = Path.GetFileNameWithoutExtension(p.AvatarFile.FileName);
+            string extension = Path.GetExtension(p.AvatarFile.FileName);
+            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+            p.Avatar = filename;
+            string s = p.Avatar;
+            filename = Path.Combine(Server.MapPath("~/Images"), filename);
+            p.AvatarFile.SaveAs(filename);
+            return s;
+        }
+        private string UpIma(PROPERTY p)
+        {
+            string filename;
+            string extension;
+            string s="";
+            string b;
+            foreach (var file in p.ImageFile2)
+            {
+
+                filename = Path.GetFileNameWithoutExtension(file.FileName);
+                extension = Path.GetExtension(file.FileName);
+                filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                p.Images = filename;
+                b = p.Images;
+                s = string.Concat(s, b, ",");
+                filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                file.SaveAs(filename);
+                
+            }
+            return s;
         }
 
         public void ListAll()
