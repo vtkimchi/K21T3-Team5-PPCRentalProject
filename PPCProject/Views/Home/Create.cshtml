@@ -1,8 +1,10 @@
-﻿@model PPCProject.Model.PROPERTY
+﻿@using PPCProject.Model;
+@model PPCProject.Model.PROPERTY
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var db = new Team35Entities();
 }
 
 <h2>Create</h2>
@@ -54,7 +56,30 @@
             </div>
         </div>
 
+
         <div class="form-group">
+            <label class="control-label col-md-2">District</label>
+            <div class="col-md-10">
+                @Html.DropDownList("District_ID", new SelectList(db.DISTRICTs, "ID", "DistrictName"), "Select District", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Ward</label>
+            <div class="col-md-10">
+                @Html.DropDownList("Ward_ID", new SelectList(db.WARDs.Take(5), "ID", "WardName"), "Select Ward", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Street</label>
+            <div class="col-md-10">
+                @Html.DropDownList("Street_ID", new SelectList(db.STREETs.Take(5), "ID", "StreetName"), "Select Street", new { @class = "form-control" })
+            </div>
+        </div>
+
+
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Street_ID, "Street", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Street_ID", (IEnumerable<SelectListItem>)ViewData["Duong"], "Street Location", htmlAttributes: new { @class = "form-control" })
@@ -76,7 +101,7 @@
                 @Html.DropDownList("District_ID", (IEnumerable<SelectListItem>)ViewData["Quan"], "District Location", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.District_ID, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -182,6 +207,7 @@
             </div>
         </div>*@
 
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" style="width:150px" />
@@ -193,3 +219,35 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script>
+        $('#District_ID').select2();
+        $('#Street_ID').select2();
+        $('#District_ID').on('change', function () {
+            $('#Street_ID').empty();
+            $.getJSON('GetStreet?District_id=' + $('#District_ID').val(),
+            function (json) {
+                $('#Street_ID').select2({ data: json });
+            });
+        });
+    </script>
+
+    <script>
+        $('#District_ID').select2();
+        $('#Ward_ID').select2();
+        $('#District_ID').on('change', function () {
+            $('#Ward_ID').empty();
+            $.getJSON('GetWard?District_id=' + $('#District_ID').val(),
+            function (json) {
+                $('#Ward_ID').select2({ data: json });
+            });
+        });
+    </script>
+
+}

@@ -2256,7 +2256,7 @@ fieldset[disabled] .btn-success.active {
 
 .btn-info {
   color: #ffffff;
-  background-color: #5bc0de;
+  background-color: #0B4C5F;
   border-color: #46b8da;
 }
 
@@ -4976,7 +4976,7 @@ a.list-group-item.active > .badge,
   border: 1px solid #dddddd;
   border-radius: 4px;
   height: 580px; 
-  box-shadow: 0px 0px 8px #ff007f;
+  box-shadow: 0px 0px 8px #2ECCFA;
   -webkit-transition: all 0.2s ease-in-out;
           transition: all 0.2s ease-in-out;
 }
@@ -6829,11 +6829,12 @@ td.visible-print {
         position: absolute;
         border: 1px solid white;
         background-color: white;
-        box-shadow: 0px 0px 8px #ff007f;
+        box-shadow: 0px 0px 8px #2ECCFA;
+        opacity: 0.9;
       
     }
 .filterbox{
-    border: 2px solid #e81491;
+    border: 2px solid #2ECCFA;
     margin-top: -255px;
     z-index: 100;
     position: absolute;
@@ -6842,7 +6843,7 @@ td.visible-print {
     font-weight:bold;
     font-family: Calibri;
     color: #fff;
-    background-color: #ff007f;
+    background-color: #2ECCFA;
     width: 150px;
     padding-left: 35px;
     
@@ -6860,24 +6861,24 @@ td.visible-print {
         font-weight: bold;
         padding: 7px 0 0 0 !important;
         position: relative;
-        color: #ff007f;
+        color: #0404B4;
     }
 
     .shape {
-        width: 120px;
-        height: 35px;
+        width: 116px;
+        height: 28px;
+        border-radius: 5px
     }
 
     .shape-text {
         
-        height: 35px;
+        height: 28px;
     }
 .shape-button {
     border-radius: 5px;
     margin-top: 24px;
-    
     width: 195px;
-    background-color: #ff007f;
+    background-color: #2ECCFA;
     font-weight: bold;
     height: 40px;
     padding-top: 10px;

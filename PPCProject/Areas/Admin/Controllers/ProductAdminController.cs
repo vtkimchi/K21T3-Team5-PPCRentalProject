@@ -37,16 +37,27 @@ namespace PPCProject.Areas.Admin.Controllers
             // Images
             var entity = model.PROPERTies.Find(p.ID);
 
-            string i = UpIma(p);
-            string s = UpAva(p);
+             try
+             {
+               
+                // string filename = Path.GetFileNameWithoutExtension(p.AvatarFile.FileName);
+                // string extension = Path.GetExtension(p.AvatarFile.FileName);
+                // filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                // p.Images = filename;
+                // string s = p.Images;
+                // filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                //p.AvatarFile.SaveAs(filename);
+                // entity.Images = p.Images;
+                string i = UpIma(p);
+                string s = UpAva(p);
                 entity.Images = i;
                 entity.Avatar = s;
                 entity.PropertyName = p.PropertyName;
                 entity.PropertyType_ID = p.PropertyType_ID;
                 entity.Content = p.Content;
-                entity.Street_ID = p.Street_ID;
-                entity.Ward_ID = p.Ward_ID;
-                entity.District_ID = p.District_ID;
+                //entity.Street_ID = p.Street_ID;
+                //entity.Ward_ID = p.Ward_ID;
+                //entity.District_ID = p.District_ID;
                 entity.UnitPrice = p.UnitPrice;
                 entity.Area = p.Area;
                 entity.BedRoom = p.BedRoom;
@@ -56,9 +67,57 @@ namespace PPCProject.Areas.Admin.Controllers
                 entity.Status_ID = p.Status_ID;
                 entity.Note = p.Note;
                 entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
-                entity.Sale_ID = p.Sale_ID;
+                //entity.Sale_ID = p.Sale_ID;
                 model.SaveChanges();
-
+             }
+             catch(Exception)
+             {
+                 try
+                 {
+                     string s = UpAva(p);
+                     entity.Avatar = s;
+                     entity.PropertyName = p.PropertyName;
+                     entity.PropertyType_ID = p.PropertyType_ID;
+                     entity.Content = p.Content;
+                     //entity.Street_ID = p.Street_ID;
+                     //entity.Ward_ID = p.Ward_ID;
+                     //entity.District_ID = p.District_ID;
+                     entity.UnitPrice = p.UnitPrice;
+                     entity.Area = p.Area;
+                     entity.BedRoom = p.BedRoom;
+                     entity.BathRoom = p.BathRoom;
+                     entity.PackingPlace = p.PackingPlace;
+                     entity.UserID = p.UserID;
+                     entity.Status_ID = p.Status_ID;
+                     entity.Note = p.Note;
+                     entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+                     //entity.Sale_ID = p.Sale_ID;
+                     model.SaveChanges();
+                 }
+                 catch(Exception)
+                 {
+                     string i = UpIma(p);
+                     entity.Images = i;
+                     entity.PropertyName = p.PropertyName;
+                     entity.PropertyType_ID = p.PropertyType_ID;
+                     entity.Content = p.Content;
+                     //entity.Street_ID = p.Street_ID;
+                     //entity.Ward_ID = p.Ward_ID;
+                     //entity.District_ID = p.District_ID;
+                     entity.UnitPrice = p.UnitPrice;
+                     entity.Area = p.Area;
+                     entity.BedRoom = p.BedRoom;
+                     entity.BathRoom = p.BathRoom;
+                     entity.PackingPlace = p.PackingPlace;
+                     entity.UserID = p.UserID;
+                     entity.Status_ID = p.Status_ID;
+                     entity.Note = p.Note;
+                     entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+                     //entity.Sale_ID = p.Sale_ID;
+                     model.SaveChanges();
+                 }
+                 
+             }
 
 
            

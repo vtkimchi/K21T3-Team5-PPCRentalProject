@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PPCProject.Model;
 
+
 namespace PPCProject.Controllers
 {
     public class HomeController : Controller
@@ -94,6 +95,12 @@ namespace PPCProject.Controllers
             return RedirectToAction("Index");
         }
 
+        public JsonResult Create(int Distric_id)
+        {
+            return Json(model.STREETs.Where(x => x.District_ID == Distric_id)
+                .Select(x => new { id = x.ID, text = x.StreetName }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public ActionResult Search(string text, string bien1, string bien2, string bed, string bath)
         {
@@ -134,9 +141,14 @@ namespace PPCProject.Controllers
                 var search5 = model.PROPERTies.ToList().Where(x =>x.PropertyName.Contains(text) || x.DISTRICT.DistrictName.Contains(text) || x.WARD.WardName.Contains(text) || x.STREET.StreetName.Contains(text)
                 || x.BathRoom.ToString().Contains(text) || x.Area.Contains(text) || x.PROPERTY_TYPE.Description.Contains(text));
                 return View(search5);
-            }
-           
+            }          
             
+        }
+
+        public JsonResult Search(int Distric_id)
+        {
+            return Json(model.STREETs.Where(x => x.District_ID == Distric_id)
+                .Select(x => new { id = x.ID, text = x.StreetName }).ToList(), JsonRequestBehavior.AllowGet);
         }
     }
 }
