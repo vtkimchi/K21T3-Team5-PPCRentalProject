@@ -50,10 +50,12 @@ namespace PPCProject.Controllers
             }
             ViewData["Duong"] = street;
         }
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
             Function();
-            var property = model.PROPERTies.ToList().OrderByDescending(x => x.ID);
+            List<object> ls = new List<object>();
+            var property = model.PROPERTies.ToList().OrderByDescending(x => x.ID); 
+            ViewBag.Page = page;
             return View(property);
         }
 

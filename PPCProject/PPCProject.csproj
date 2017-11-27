@@ -129,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\Views\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
+    <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\DetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -179,6 +180,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AgencyContent\bootstrap-theme.css" />
+    <Content Include="Content\AgencyContent\bootstrap.min.css" />
+    <Content Include="Content\AgencyContent\elegant-icons-style.css" />
+    <Content Include="Content\AgencyContent\style-responsive.css" />
+    <Content Include="Content\AgencyContent\style.css" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -193,6 +199,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="IconImages\add.png" />
+    <Content Include="IconImages\message.png" />
+    <Content Include="IconImages\notifications.png" />
+    <Content Include="IconImages\placeholder.png" />
+    <Content Include="IconImages\power.png" />
+    <Content Include="IconImages\search.png" />
+    <Content Include="IconImages\setting.png" />
+    <Content Include="IconImages\task1.png" />
     <Content Include="Images\AvatarProjectNone.png" />
     <Content Include="Images\iconPlace.png" />
     <Content Include="Images\icon_area.png" />
@@ -211,6 +225,11 @@
     <Content Include="Images\PIS_7389-Edit-stamp.jpg" />
     <Content Include="Images\PIS_7432-Edit-stamp.jpg" />
     <Content Include="Images\sunshine-benthanh-cityhome-10-stamp.jpg" />
+    <Content Include="Scripts\AgencyScripts\bootstrap.min.js" />
+    <Content Include="Scripts\AgencyScripts\jquery.js" />
+    <Content Include="Scripts\AgencyScripts\jquery.nicescroll.js" />
+    <Content Include="Scripts\AgencyScripts\jquery.scrollTo.min.js" />
+    <Content Include="Scripts\AgencyScripts\scripts.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <EntityDeploy Include="Model\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -284,6 +303,8 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Agency\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutAgency.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

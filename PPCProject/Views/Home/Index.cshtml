@@ -3,6 +3,10 @@
 @{
     ViewBag.Title = "";
     var model = new Team35Entities();
+    var lstProper = model.PROPERTies.ToList();
+    int max = 5;
+    int page = (int)ViewBag.Page;
+    lstProper = lstProper.Skip((page - 1) * max).Take(max).ToList();
 }
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">    
     <!-- Wrapper for slides -->
@@ -162,6 +166,77 @@
             </div>
         }
     </div>
+     <!-- Pagination-->
+     @if (page == 1)
+     {
+         <div style=" margin-left: 400px;">
+             <ul class="pagination">
+                 <li class="disabled"><a href="#">Previous</a></li>
+                 <li class="active"><a href="@Url.Action("Index", new { page = page })">1</a></li>
+                 <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">2</a></li>
+                 <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 2 })">3</a></li>
+                 <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 3 })">4</a></li>
+                 <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 4 })">5</a></li>
+                 <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">Next</a></li>
+             </ul>
+         </div>
+     }
+     @if (page == 2)
+{
+    <div style=" margin-left: 400px;">
+        <ul class="pagination">
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">Previous</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page -1 })">1</a></li>
+            <li class="active"><a href="@Url.Action("Index", new { page = page })">2</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">3</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 2 })">4</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 3 })">5</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">Next</a></li>
+        </ul>
+    </div>
+}
+     @if (page == 3)
+{
+    <div style=" margin-left: 400px;">
+        <ul class="pagination">
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">Previous</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 2   })">1</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">2</a></li>
+            <li class="active"><a href="@Url.Action("Index", new { page = page })">3</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">4</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 2 })">5</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">Next</a></li>
+        </ul>
+    </div>
+}
+     @if (page == 4)
+{
+    <div style=" margin-left:400px;">
+        <ul class="pagination">
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">Previous</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 3 })">1</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 2 })">2</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">3</a></li>
+            <li class="active"><a href="@Url.Action("Index", new { page = page })">4</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">5</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">Next</a></li>
+        </ul>
+    </div>
+}
+     @if (page == 5)
+{
+    <div style=" margin-left: 400px;">
+        <ul class="pagination">
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">Previous</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 4 })">1</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 3 })">2</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 2 })">3</a></li>
+            <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">4</a></li>
+            <li class="active"><a href="@Url.Action("Index", new { page = page  })">5</a></li>
+            <li class="disabled"><a href="#">Next</a></li>
+        </ul>
+    </div>
+}
 </div>
 
 @section Scripts {
