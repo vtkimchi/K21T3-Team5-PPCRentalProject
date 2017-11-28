@@ -27,23 +27,23 @@
                         <th>Unit Price</th>
                         <th>District</th>
                         <th>Area</th>
-                        <th>Created post</th>
-                        <th>Action</th>
+                        @*<th>Created post</th>
+                            <th>Action</th>*@
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
-{
+                    {
                         <tr class="odd gradeX">
                             <td>@item.PropertyName</td>
                             <td><img src="@Url.Content("~/Images/"+item.Avatar)" width="100px"></td>
                             @*<td><img src="/Images/@item.Avatar"  width="100px"></td>*@
-                            <td>@item.PROPERTY_TYPE.Description</td>
+                            <td>@item.PROPERTY_TYPE.CodeType</td>
                             <td>@item.Price</td>
                             <td>@item.UnitPrice</td>
                             <td>@item.DISTRICT.DistrictName</td>
                             <td>@item.Area</td>
-                            <td>@item.Create_post</td>
+                            @*<td>@item.Create_post</td>*@
                             @*<td>@item.Created_at</td>
                                 <td>@item.Create_post</td>
                                 <td>@item.Updated_at</td>*@
@@ -56,7 +56,7 @@
                                 </div>
                             </td>
                         </tr>
-}
+                    }
                 </tbody>
             </table>
         </section>

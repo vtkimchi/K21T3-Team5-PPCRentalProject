@@ -153,7 +153,18 @@
                         <p style="color: red"><img src="~/Images/icon_money.png" /> @item.Price @item.UnitPrice</p>
                         <p><img src="~/Images/iconPlace.png" />@item.STREET.StreetName, @item.WARD.WardName,@item.DISTRICT.DistrictName</p>
                         <p>@item.PROPERTY_TYPE.Description</p>
-                        <p>@item.Content.Substring(0, 100)...</p>
+                        @{
+                            if (item.Content != null && item.Content.Length >= 100)
+                            {
+                                <span>@item.Content.Substring(0, 100)...</span>
+                            }
+                            else
+                            {
+
+                                <span>@item.Content</span>
+
+                            }
+                        }
                         <p>
                             <span><img src="~/Images/icon_bed.png" /> (@item.BedRoom)</span>
                             <span><img src="~/Images/icon_bath.png" />(@item.BathRoom)</span>
