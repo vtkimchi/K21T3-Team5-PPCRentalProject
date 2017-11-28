@@ -96,25 +96,50 @@ namespace PPCProject.Areas.Admin.Controllers
                  }
                  catch(Exception)
                  {
-                     string i = UpIma(p);
-                     entity.Images = i;
-                     entity.PropertyName = p.PropertyName;
-                     entity.PropertyType_ID = p.PropertyType_ID;
-                     entity.Content = p.Content;
-                     //entity.Street_ID = p.Street_ID;
-                     //entity.Ward_ID = p.Ward_ID;
-                     //entity.District_ID = p.District_ID;
-                     entity.UnitPrice = p.UnitPrice;
-                     entity.Area = p.Area;
-                     entity.BedRoom = p.BedRoom;
-                     entity.BathRoom = p.BathRoom;
-                     entity.PackingPlace = p.PackingPlace;
-                     entity.UserID = p.UserID;
-                     entity.Status_ID = p.Status_ID;
-                     entity.Note = p.Note;
-                     entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
-                     //entity.Sale_ID = p.Sale_ID;
-                     model.SaveChanges();
+                     try
+                     {
+                         string i = UpIma(p);
+                         entity.Images = i;
+                         entity.PropertyName = p.PropertyName;
+                         entity.PropertyType_ID = p.PropertyType_ID;
+                         entity.Content = p.Content;
+                         //entity.Street_ID = p.Street_ID;
+                         //entity.Ward_ID = p.Ward_ID;
+                         //entity.District_ID = p.District_ID;
+                         entity.UnitPrice = p.UnitPrice;
+                         entity.Area = p.Area;
+                         entity.BedRoom = p.BedRoom;
+                         entity.BathRoom = p.BathRoom;
+                         entity.PackingPlace = p.PackingPlace;
+                         entity.UserID = p.UserID;
+                         entity.Status_ID = p.Status_ID;
+                         entity.Note = p.Note;
+                         entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+                         //entity.Sale_ID = p.Sale_ID;
+                         model.SaveChanges();
+                     }
+                     catch(Exception)
+                     {
+                         
+                         entity.PropertyName = p.PropertyName;
+                         entity.PropertyType_ID = p.PropertyType_ID;
+                         entity.Content = p.Content;
+                         //entity.Street_ID = p.Street_ID;
+                         //entity.Ward_ID = p.Ward_ID;
+                         //entity.District_ID = p.District_ID;
+                         entity.UnitPrice = p.UnitPrice;
+                         entity.Area = p.Area;
+                         entity.BedRoom = p.BedRoom;
+                         entity.BathRoom = p.BathRoom;
+                         entity.PackingPlace = p.PackingPlace;
+                         entity.UserID = p.UserID;
+                         entity.Status_ID = p.Status_ID;
+                         entity.Note = p.Note;
+                         entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+                         //entity.Sale_ID = p.Sale_ID;
+                         model.SaveChanges();
+                     }
+                    
                  }
                  
              }
