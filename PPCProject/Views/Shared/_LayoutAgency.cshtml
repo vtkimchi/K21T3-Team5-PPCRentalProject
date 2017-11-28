@@ -47,11 +47,11 @@
             <div class="nav search-row" id="top_menu">
                 <!--  search form start -->
                 <ul class="nav top-menu">
-                    <li>
+                    @*<li>
                         <form class="navbar-form">
                             <input class="form-control" placeholder="Search" type="text">
                         </form>
-                    </li>
+                    </li>*@
                 </ul>
                 <!--  search form end -->
             </div>
@@ -331,7 +331,7 @@
                         </a>
                     </li>
                     <li class="sub-menu">
-                        <a href="javascript:;" class="">
+                        <a href="@Url.Action("Index", "Home")" class="">
                             <img src="~/IconImages/power.png" />
                             <span>LOG OUT</span>
                         </a>
@@ -360,6 +360,15 @@
     <script src="~/Scripts/AgencyScripts/jquery.nicescroll.js"></script>
     <!--custome script for all page-->
     <script src="~/Scripts/AgencyScripts/scripts.js"></script>
+
+    @*Thêm*@
+
+    <script src="~/Scripts/jquery.dataTables.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Scripts/sb-admin-datatables.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
 
 </body>
 </html>

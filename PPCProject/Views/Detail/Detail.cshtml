@@ -35,19 +35,14 @@
             </p>
 
             <p>
-                @*@Html.DisplayFor(model => model.Images)*@
-                @*<img src="/Images/@Model.Images" />*@
-                @{string[] chuoi = @Model.Images.Split(',');
-
-                }
-                @for (int i = 0; i < chuoi.Count() - 1; i++)
+                @if (Model.Images != null)
                 {
-                    <img src="~/Images/@chuoi[i]" width="100px" alt="@Model.Images" />
+                    string[] chuoi = Model.Images.Split(',');
+                    for (int i = 0; i < chuoi.Count() - 1; i++)
+                    {
+                        <img src="~/Images/@chuoi[i]" width="100px" alt="@Model.Images" />
+                    }
                 }
-                @*<img src="~/Images/@Model.Avatar" width="250" /> <br><br>*@
-                @*<div>
-                    <input type="file" name="ImageFile2" multiple />
-                </div>*@
             </p>
 
             <p>

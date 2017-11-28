@@ -14,11 +14,51 @@ namespace PPCProject.Controllers
         Team35Entities model = new Team35Entities();
         //
         // GET: /Agency/
-        public ActionResult Index()
+        public ActionResult Index(int? user_id)
         {
-            var property = model.PROPERTies.ToList().OrderByDescending(x => x.ID);
+            var property = model.PROPERTies.ToList().OrderByDescending(x => x.ID).Where(x => x.UserID == user_id);
             return View(property);
         }
+
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(string email, string password)
+        {
+            var user = model.USERs.FirstOrDefault(x => x.Email == email);
+            if (user != null)
+            {
+                if (user.Password.Equals(password))
+                {
+                    Session["FullName"] = user.FullName;
+                    Session["UserID"] = user.ID;
+
+                    return RedirectToAction("Index", new { @user_id = user.ID });
+ 
+                }
+            }
+            else
+            {
+                ViewBag.mess = "Account Invalid";
+            }
+            return View();
+        }
+        public ActionResult Logout(int id)
+        {
+            var user = model.USERs.FirstOrDefault(x => x.ID == id);
+            if (user != null)
+            {
+                Session["FullName"] = null;
+                Session["UserID"] = null;
+            }
+            return RedirectToAction("Login");
+        }
+
+
         public ActionResult Create()
         {
             ListItem();
