@@ -50,7 +50,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Content, new { @class = "required", @cols = 40, @rows = 10 })
+                    @Html.TextAreaFor(model => model.Content, new { @class = "required", @cols = 55, @rows = 10 })
                     @Html.ValidationMessageFor(model => model.Content)
                 </div>
             </div>
@@ -58,21 +58,21 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.DISTRICT.DistrictName, new { @class = "control-label col-md-2 " })
                 <div class="col-md-10">
-                    @Html.DropDownList("District_ID", new SelectList(db.DISTRICTs, "ID", "DistrictName"), "Select District", new { @class = "form-control shape" })
+                    @Html.DropDownList("District_ID", new SelectList(db.DISTRICTs, "ID", "DistrictName"), "Select District")
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.WARD.WardName, new { @class = "control-label col-md-2 " })
                 <div class="col-md-10">
-                    @Html.DropDownList("Ward_ID", new SelectList(db.WARDs.Take(0), "ID", "WardName"), "Select Ward", new { @class = "form-control shape" })
+                    @Html.DropDownList("Ward_ID", new SelectList(db.WARDs.Take(0), "ID", "WardName"), "Select Ward")
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.STREET.StreetName, new { @class = "control-label col-md-2 " })
                 <div class="col-md-10">
-                    @Html.DropDownList("Street_ID", new SelectList(db.STREETs.Take(0), "ID", "StreetName"), "Select Street", new { @class = "form-control shape" })
+                    @Html.DropDownList("Street_ID", new SelectList(db.STREETs.Take(0), "ID", "StreetName"), "Select Street")
                 </div>
             </div>
 
@@ -92,6 +92,10 @@
                 </div>
             </div>
 
+            
+        </div>
+
+        <div class="col-xs-6">
             <div class="form-group">
                 @Html.LabelFor(model => model.Area, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -107,9 +111,6 @@
                     @Html.ValidationMessageFor(model => model.BedRoom)
                 </div>
             </div>
-        </div>
-    </div>
-        <div class="col-xs-6">
             <div class="form-group">
                 @Html.LabelFor(model => model.BathRoom, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -136,20 +137,20 @@
             </div>
 
             @*<div class="form-group">
-                @Html.LabelFor(model => model.Created_at, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Created_at)
-                    @Html.ValidationMessageFor(model => model.Created_at)
+                    @Html.LabelFor(model => model.Created_at, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Created_at)
+                        @Html.ValidationMessageFor(model => model.Created_at)
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Create_post, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Create_post)
-                    @Html.ValidationMessageFor(model => model.Create_post)
-                </div>
-            </div>*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Create_post, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Create_post)
+                        @Html.ValidationMessageFor(model => model.Create_post)
+                    </div>
+                </div>*@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Status_ID, "Status_ID", new { @class = "control-label col-md-2" })
@@ -174,7 +175,7 @@
 
                         <input type="file" name="AvatarFile" />
                         @*@Html.EditorFor(model => model.Images, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })*@
+                            @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })*@
 
                     </div>
                 </div>
@@ -213,7 +214,7 @@
                 <button type="submit" class="btn btn-outline-primary" style="font-size: medium; width: 100px">Save</button>
             </div>
         </div>
-    
+    </div>
 }
 
 <div>

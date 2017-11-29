@@ -15,7 +15,7 @@
             <img class="img-rounded img-responsive" src="~/Images/IMG_1592-stamp.jpg" width="100%" />
         </div>
         <div class="item">
-            <img class="img-rounded img-responsive" src="~/Images/PIS_4622-Edit.jpg" width="100%" />
+            <img class="img-rounded img-responsive" src="~/Images/PIS3280-Edit-stamp.jpg" width="100%" />
         </div>
         <div class="item">
             <img class="img-rounded img-responsive" src="~/Images/PIS_6656-Edit-stamp.jpg" width="100%" />
@@ -62,10 +62,10 @@
                     @Html.DropDownList("District_ID", new SelectList(model.DISTRICTs, "ID", "DistrictName"), "Select District", new { @class = "form-control shape" })
                 </div>
 
-                <div class="col-xs-2">
+                @*<div class="col-xs-2">
                     <label>Ward</label>
                     @Html.DropDownList("Ward_ID", new SelectList(model.WARDs.Take(0), "ID", "WardName"), "Select Ward", new { @class = "form-control shape" })
-                </div>
+                </div>*@
 
                 <div class="col-xs-2">
                     <label>Street</label>
