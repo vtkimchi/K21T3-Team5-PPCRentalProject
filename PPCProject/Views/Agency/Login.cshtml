@@ -18,13 +18,17 @@
     <!-- Mixins-->
     <!-- Pen Title-->
     <div class="pen-title">
-        <h2>SIGN INTO YOUR ACCOUNT</h2>
+        <h1>SIGN INTO YOUR ACCOUNT</h1>
     </div>
     <div class="container">
         <div class="card"></div>
         <div class="card">
             <h1 class="title">Login</h1>
             <form action="/Agency/Login" method="post">
+                @if (ViewBag.mess != null)
+                {
+                    <p style="margin-left: 13%; margin-bottom: 3%">@ViewBag.mess</p>
+                }
                 <div class="input-container">
                     <input type="text" name="email" required />
                     <label>Username</label>
@@ -49,18 +53,18 @@
             </h1>
             <form>
                 <div class="input-container">
-                    <input type="text" id="#{label}" required="required" />
-                    <label for="#{label}">Username</label>
+                    <input type="text" required />
+                    <label>Username</label>
                     <div class="bar"></div>
                 </div>
                 <div class="input-container">
-                    <input type="password" id="#{label}" required="required" />
-                    <label for="#{label}">Password</label>
+                    <input type="password" required="required" />
+                    <label>Password</label>
                     <div class="bar"></div>
                 </div>
                 <div class="input-container">
-                    <input type="password" id="#{label}" required="required" />
-                    <label for="#{label}">Repeat Password</label>
+                    <input type="password" required="required" />
+                    <label>Repeat Password</label>
                     <div class="bar"></div>
                 </div>
                 <div class="button-container">
