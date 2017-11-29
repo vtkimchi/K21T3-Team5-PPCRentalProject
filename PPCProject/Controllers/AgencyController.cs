@@ -11,6 +11,7 @@ namespace PPCProject.Controllers
 {
     public class AgencyController : Controller
     {
+        public static string idd ="";
         Team35Entities model = new Team35Entities();
         //
         // GET: /Agency/
@@ -18,7 +19,8 @@ namespace PPCProject.Controllers
         {
             if (Session["UserID"] != null)
             {
-                var property = model.PROPERTies.ToList().OrderByDescending(x => x.ID).Where(x => x.UserID == user_id);
+                idd = Session["UserID"].ToString();
+                var property = model.PROPERTies.Where(x => x.UserID == user_id).OrderByDescending(x => x.ID).ToList();
                 return View(property);
             }
             else
@@ -100,6 +102,8 @@ namespace PPCProject.Controllers
                 }
 
                 pROPERTY.Created_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+                pROPERTY.UserID = int.Parse(idd);
+                pROPERTY.Status_ID = 1;
                 var model = new XulyModels();
                 if (ModelState.IsValid)
                 {
@@ -139,12 +143,50 @@ namespace PPCProject.Controllers
 
 
             }
-            catch
+            catch(NullReferenceException)
             {
+                pROPERTY.Created_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+                pROPERTY.UserID = int.Parse(idd);
+                pROPERTY.Status_ID = 1;
+                var model = new XulyModels();
+                if (ModelState.IsValid)
+                {
+                    long id = model.Insert(pROPERTY);
+                    var path = "";
+                    foreach (var item in files)
+                    {
+                        if (item != null)
+                        {
+                            if (item.ContentLength > 0)
+                            {
+                                if (Path.GetExtension(item.FileName).ToLower() == ".jpg"
+                                    || Path.GetExtension(item.FileName).ToLower() == ".png"
+                                    || Path.GetExtension(item.FileName).ToLower() == ".gif"
+                                    || Path.GetExtension(item.FileName).ToLower() == ".jpeg")
+                                {
+                                    var path0 = id + item.FileName;
+                                    path = Path.Combine(Server.MapPath("~/MultiImages"), path0);
 
+                                    item.SaveAs(path);
+                                    ViewBag.UploadSuccess = true;
+
+                                }
+                            }
+                        }
+                    }
+                    if (id > 0)
+
+                    {
+                        return RedirectToAction("Index", "Agency");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Create khong thanh cong");
+                    }
+                }
             }
 
-            return View( pROPERTY);
+            return View();
         }
 
 
