@@ -1,11 +1,12 @@
 ﻿@model PPCProject.Model.PROPERTY
-
+@using PPCProject.Model;
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAgency.cshtml";
+    var db = new Team35Entities();
 }
 
-<h2>Create</h2>
+<h2 style="text-align: center">CREATE PROPERTY</h2>
 @{ 
     
 }
@@ -15,7 +16,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>PROPERTY</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -53,9 +53,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PropertyType_ID, "PropertyType_ID", new { @class = "control-label col-md-2" })
-            <div class=" col-md-10">
-                @Html.DropDownList("PropertyType_ID", new SelectList(ViewBag.property_type, "ID", "CodeType"))
+            @Html.LabelFor(model => model.PropertyType_ID, "Property Type", new { @class = "control-label col-md-2" })
+            <div class=" col-md-4">
+                @Html.DropDownList("PropertyType_ID", new SelectList(ViewBag.property_type, "ID", "CodeType"), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PropertyType_ID)
             </div>
         </div>
@@ -63,32 +63,29 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.TextAreaFor(model => model.Content, new { @class = "required", @cols = 40, @rows = 10 })
+                @Html.TextAreaFor(model => model.Content, new { @class = "form-control required", @cols = 55, @rows = 10 })
                 @Html.ValidationMessageFor(model => model.Content)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.District_ID, "District_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DISTRICT.DistrictName, new { @class = "control-label col-md-2 " })
             <div class="col-md-4">
-                @Html.DropDownList("District_ID", new SelectList(ViewBag.district, "ID", "DistrictName"))
-                @Html.ValidationMessageFor(model => model.District_ID, "", new { @class = "text-danger" })
+                @Html.DropDownList("District_ID", new SelectList(db.DISTRICTs, "ID", "DistrictName"), "Select District", new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Ward_ID, "Ward_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.WARD.WardName, new { @class = "control-label col-md-2 " })
             <div class="col-md-4">
-                @Html.DropDownList("Ward_ID", new SelectList(ViewBag.ward, "ID", "WardName"))
-                @Html.ValidationMessageFor(model => model.Ward_ID, "", new { @class = "text-danger" })
+                @Html.DropDownList("Ward_ID", new SelectList(db.WARDs.Take(0), "ID", "WardName"), "Select Ward", new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Street_ID, "Street_ID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Street_ID", new SelectList(ViewBag.street, "ID", "StreetName"))
-                @Html.ValidationMessageFor(model => model.Street_ID, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.STREET.StreetName, new { @class = "control-label col-md-2 " })
+            <div class="col-md-4">
+                @Html.DropDownList("Street_ID", new SelectList(db.STREETs.Take(0), "ID", "StreetName"), "Select Street", new { @class = "form-control" })
             </div>
         </div>
 
@@ -316,9 +313,9 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 
-                    <input  type="submit" value="Post" class="btn btn-default" />
-           
-                   </div>
+                    <input type="submit" value="Post" class="btn btn-default" />
+                            
+            </div>
 
         </div>
     </div>
@@ -331,3 +328,32 @@
 @*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }*@
+
+@section Scripts {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script>
+        $('#District_ID').select2();
+        $('#Street_ID').select2();
+        $('#District_ID').on('change', function () {
+            $('#Street_ID').empty();
+            $.getJSON('/Home/GetStreet?Distric_id=' + $('#District_ID').val(),
+            function (json) {
+                $('#Street_ID').select2({ data: json });
+            });
+        });
+
+        $('#District_ID').select2();
+        $('#Ward_ID').select2();
+        $('#District_ID').on('change', function () {
+            $('#Ward_ID').empty();
+            $.getJSON('/Home/GetWard?Distric_id=' + $('#District_ID').val(),
+            function (json) {
+                $('#Ward_ID').select2({ data: json });
+            });
+        });
+    </script>
+}

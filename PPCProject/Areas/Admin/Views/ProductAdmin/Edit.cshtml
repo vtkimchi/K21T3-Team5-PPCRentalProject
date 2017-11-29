@@ -65,7 +65,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.WARD.WardName, new { @class = "control-label col-md-2 " })
                 <div class="col-md-10">
-                    @Html.DropDownList("Ward_ID", new SelectList(db.WARDs, "ID", "WardName"), "Select Ward", new { @class = "form-control shape" })
+                    @Html.DropDownList("Ward_ID", new SelectList(db.WARDs.Take(0), "ID", "WardName"), "Select Ward", new { @class = "form-control shape" })
                 </div>
             </div>
 

@@ -200,5 +200,16 @@ namespace PPCProject.Controllers
             ViewBag.status = model.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
 
         }
+
+        public JsonResult GetStreet(int Distric_id)
+        {
+            return Json(model.STREETs.Where(x => x.District_ID == Distric_id)
+                .Select(x => new { id = x.ID, text = x.StreetName }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetWard(int Distric_id)
+        {
+            return Json(model.WARDs.Where(x => x.District_ID == Distric_id)
+                .Select(x => new { id = x.ID, text = x.WardName }).ToList(), JsonRequestBehavior.AllowGet);
+        }
     }
 }
