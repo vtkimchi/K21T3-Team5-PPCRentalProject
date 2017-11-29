@@ -3,10 +3,10 @@
 @{
     ViewBag.Title = "";
     var model = new Team35Entities();
-    var lstProper = model.PROPERTies.ToList();
-    int max = 5;
-    int page = (int)ViewBag.Page;
-    lstProper = lstProper.Skip((page - 1) * max).Take(max).ToList();
+    //var lstProper = model.PROPERTies.ToList();
+    //int max = 5;
+    //int page = (int)ViewBag.Page;
+    //lstProper = lstProper.Skip((page - 1) * max).Take(max).ToList();
 }
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">    
     <!-- Wrapper for slides -->
@@ -63,29 +63,15 @@
                 </div>
 
                 <div class="col-xs-2">
-                    <label>Street</label>
-                    @Html.DropDownList("Street_ID", new SelectList(model.STREETs.Take(5), "ID", "StreetName"), "Select Street", new { @class = "form-control shape" })
+                    <label>Ward</label>
+                    @Html.DropDownList("Ward_ID", new SelectList(model.WARDs.Take(0), "ID", "WardName"), "Select Ward", new { @class = "form-control shape" })
                 </div>
-                @*<div class="col-xs-2">
-                        <div class="show-menu-arrow selectpicker">
-                            <label>Location</label>
-                            @Html.DropDownList("bien2", (IEnumerable<SelectListItem>)ViewData["Quan"], "All Location", new {@class="shape" })
-                        </div>
-                    </div>*@
-                <!--   <div class="col-xs-2">
-                        <label>Ward</label>
-                        <select class="show-menu-arrow selectpicker shape">
-                            @*@Html.DropDownList("bien3", (IEnumerable<SelectListItem>)ViewData["Phuong"], new {@class="shape"})*@
-                            <option value="1">Không có</option>
-                        </select>
-                    </div>
-                    <div class="col-xs-2 ">
-                        <label>Street</label>
-                        <select class="show-menu-arrow selectpicker shape">
-                            @*@Html.DropDownList("streeT", (IEnumerable<SelectListItem>)ViewData["Duong"], new { @class = "shape" })*@
-                            <option value="1">Không có</option>
-                        </select>
-                    </div> -->
+
+                <div class="col-xs-2">
+                    <label>Street</label>
+                    @Html.DropDownList("Street_ID", new SelectList(model.STREETs.Take(0), "ID", "StreetName"), "Select Street", new { @class = "form-control shape" })
+                </div>
+               
                 <div class="col-xs-2 ">
                     <label>Bedrooms</label>
                     <select class="show-menu-arrow selectpicker shape" name="bed">
@@ -106,26 +92,7 @@
                         <option value="4">4</option>
                     </select>
                 </div>
-                <!--      <div class="col-xs-2 ">
-                          <label for="min_price">Min Price</label>
-                          <select id="min_price" class="show-menu-arrow selectpicker shape" name="minprice">
-                              <option value="0">Min Price</option>
-                              <option value="1">$10000</option>
-                              <option value="2">$30000</option>
-                              <option value="3">$40000</option>
-                              <option value="4">$70000</option>
-                          </select>
-                      </div>
-                      <div class="col-xs-2 ">
-                          <label for="max_price">Max Price</label>
-                          <select id="max_price" class="show-menu-arrow selectpicker shape" name="maxprice">
-                              <option value="0">Max Price</option>
-                              <option value="1">$90000</option>
-                              <option value="2">$110000</option>
-                              <option value="3">$200000</option>
-                              <option value="4">$990000</option>
-                          </select>
-                      </div> -->
+               
                 <div class="col-xs-2">
                     <label>Key Word</label>
                     <input type="text" class="form-control shape-text" style="width: 200px" placeholder="Type Keyword" name="text" />
@@ -160,9 +127,7 @@
                             }
                             else
                             {
-
                                 <span>@item.Content</span>
-
                             }
                         }
                         <p>
@@ -178,7 +143,7 @@
         }
     </div>
      <!-- Pagination-->
-     @if (page == 1)
+     @*@if (page == 1)
      {
          <div style=" margin-left: 400px;">
              <ul class="pagination">
@@ -247,7 +212,7 @@
             <li class="disabled"><a href="#">Next</a></li>
         </ul>
     </div>
-}
+}*@
 </div>
 
 @section Scripts {
@@ -261,9 +226,19 @@
         $('#Street_ID').select2();
         $('#District_ID').on('change', function () {
             $('#Street_ID').empty();
-            $.getJSON('GetStreet?District_id=' + $('#District_ID').val(),
+            $.getJSON('/Home/GetStreet?Distric_id=' + $('#District_ID').val(),
             function (json) {
                 $('#Street_ID').select2({ data: json });
+            });
+        });
+
+        $('#District_ID').select2();
+        $('#Ward_ID').select2();
+        $('#District_ID').on('change', function () {
+            $('#Ward_ID').empty();
+            $.getJSON('/Home/GetWard?Distric_id=' + $('#District_ID').val(),
+            function (json) {
+                $('#Ward_ID').select2({ data: json });
             });
         });
     </script>

@@ -1,6 +1,12 @@
-﻿@model IEnumerable<PPCProject.Model.PROPERTY>
+﻿@using PPCProject.Model;
+@model IEnumerable<PPCProject.Model.PROPERTY>
 @{
     ViewBag.Title = "";
+    var model = new Team35Entities();
+    //var lstProper = model.PROPERTies.ToList();
+    //int max = 5;
+    //int page = (int)ViewBag.Page;
+    //lstProper = lstProper.Skip((page - 1) * max).Take(max).ToList();
 }
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->
@@ -37,7 +43,6 @@
     <p class="filterbox">SEARCH</p>
 
     <div class="filter-form">
-
         <form id="advanced_search" role="search" action="@Url.Action("Search","Home")" name="search" method="get">
             @*<div class="col-xs-2 ">
                     <label>Country</label>
@@ -45,32 +50,28 @@
                         <option value="vietnam">VietNam</option>
                     </select>
                 </div>*@
-            <div class="col-xs-2 ">
+            <div class="col-xs-2">
                 <label>Type</label>
                 <div class="show-menu-arrow selectpicker">
                     @Html.DropDownList("bien1", (IEnumerable<SelectListItem>)ViewData["LoaiDA"], "All Type", new { @class = "shape" })
                 </div>
             </div>
+
             <div class="col-xs-2">
-                <div class="show-menu-arrow selectpicker">
-                    <label>Location</label>
-                    @Html.DropDownList("bien2", (IEnumerable<SelectListItem>)ViewData["Quan"], "All Location", new { @class = "shape" })
-                </div>
+                <label>District</label>
+                @Html.DropDownList("District_ID", new SelectList(model.DISTRICTs, "ID", "DistrictName"), "Select District", new { @class = "form-control shape" })
             </div>
-            <!--   <div class="col-xs-2">
-                    <label>Ward</label>
-                    <select class="show-menu-arrow selectpicker shape">
-                        @*@Html.DropDownList("bien3", (IEnumerable<SelectListItem>)ViewData["Phuong"], new {@class="shape"})*@
-                        <option value="1">Không có</option>
-                    </select>
-                </div>
-                <div class="col-xs-2 ">
-                    <label>Street</label>
-                    <select class="show-menu-arrow selectpicker shape">
-                        @*@Html.DropDownList("streeT", (IEnumerable<SelectListItem>)ViewData["Duong"], new { @class = "shape" })*@
-                        <option value="1">Không có</option>
-                    </select>
-                </div> -->
+
+            <div class="col-xs-2">
+                <label>Ward</label>
+                @Html.DropDownList("Ward_ID", new SelectList(model.WARDs.Take(0), "ID", "WardName"), "Select Ward", new { @class = "form-control shape" })
+            </div>
+
+            <div class="col-xs-2">
+                <label>Street</label>
+                @Html.DropDownList("Street_ID", new SelectList(model.STREETs.Take(0), "ID", "StreetName"), "Select Street", new { @class = "form-control shape" })
+            </div>
+
             <div class="col-xs-2 ">
                 <label>Bedrooms</label>
                 <select class="show-menu-arrow selectpicker shape" name="bed">
@@ -91,29 +92,10 @@
                     <option value="4">4</option>
                 </select>
             </div>
-            <!--      <div class="col-xs-2 ">
-                      <label for="min_price">Min Price</label>
-                      <select id="min_price" class="show-menu-arrow selectpicker shape" name="minprice">
-                          <option value="0">Min Price</option>
-                          <option value="1">$10000</option>
-                          <option value="2">$30000</option>
-                          <option value="3">$40000</option>
-                          <option value="4">$70000</option>
-                      </select>
-                  </div>
-                  <div class="col-xs-2 ">
-                      <label for="max_price">Max Price</label>
-                      <select id="max_price" class="show-menu-arrow selectpicker shape" name="maxprice">
-                          <option value="0">Max Price</option>
-                          <option value="1">$90000</option>
-                          <option value="2">$110000</option>
-                          <option value="3">$200000</option>
-                          <option value="4">$990000</option>
-                      </select>
-                  </div> -->
+
             <div class="col-xs-2">
                 <label>Key Word</label>
-                <input type="text" class="form-control shape-text" style="width: 280px;" placeholder="Type Keyword" name="text" />
+                <input type="text" class="form-control shape-text" style="width: 200px" placeholder="Type Keyword" name="text" />
             </div>
             <div class="col-xs-6">
                 <button type="submit" class="btn btn-info shape-button" style="margin-left: 450px;">SEARCH PROPERTY</button>
@@ -132,22 +114,134 @@
         {
             <div class="col-md-4 margin-style wow fadeInUp">
                 <div class="thumbnail">
-                    <img src="/Images/@item.Avatar" alt="@item.PropertyName">
+                    <img src="/Images/@item.Avatar" alt="@item.PropertyName" style="width: 350px; height: 232px">
                     <div class="caption">
                         <h3>@item.PropertyName</h3>
                         <p style="color: red"><img src="~/Images/icon_money.png" /> @item.Price @item.UnitPrice</p>
                         <p><img src="~/Images/iconPlace.png" />@item.STREET.StreetName, @item.WARD.WardName,@item.DISTRICT.DistrictName</p>
                         <p>@item.PROPERTY_TYPE.Description</p>
-                        <p>@item.Content.Substring(0, 100)...</p>
+                        @{
+            if (item.Content != null && item.Content.Length >= 100)
+            {
+                <span>@item.Content.Substring(0, 100)...</span>
+            }
+            else
+            {
+                <span>@item.Content</span>
+            }
+                        }
                         <p>
                             <span><img src="~/Images/icon_bed.png" /> (@item.BedRoom)</span>
                             <span><img src="~/Images/icon_bath.png" />(@item.BathRoom)</span>
                             <span><img src="~/Images/icon_area.png" />(@item.Area) </span>
                         </p>
                         <p><a href="/Detail/Detail/@item.ID" class="btn btn-primary" role="button" style="margin-left: 260px">Detail</a></p>
+
                     </div>
                 </div>
             </div>
         }
     </div>
+    <!-- Pagination-->
+    @*@if (page == 1)
+             {
+                 <div style=" margin-left: 400px;">
+                     <ul class="pagination">
+                         <li class="disabled"><a href="#">Previous</a></li>
+                         <li class="active"><a href="@Url.Action("Index", new { page = page })">1</a></li>
+                         <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">2</a></li>
+                         <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 2 })">3</a></li>
+                         <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 3 })">4</a></li>
+                         <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 4 })">5</a></li>
+                         <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">Next</a></li>
+                     </ul>
+                 </div>
+             }
+             @if (page == 2)
+        {
+            <div style=" margin-left: 400px;">
+                <ul class="pagination">
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">Previous</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page -1 })">1</a></li>
+                    <li class="active"><a href="@Url.Action("Index", new { page = page })">2</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">3</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 2 })">4</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 3 })">5</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">Next</a></li>
+                </ul>
+            </div>
+        }
+             @if (page == 3)
+        {
+            <div style=" margin-left: 400px;">
+                <ul class="pagination">
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">Previous</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 2   })">1</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">2</a></li>
+                    <li class="active"><a href="@Url.Action("Index", new { page = page })">3</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">4</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 2 })">5</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">Next</a></li>
+                </ul>
+            </div>
+        }
+             @if (page == 4)
+        {
+            <div style=" margin-left:400px;">
+                <ul class="pagination">
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">Previous</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 3 })">1</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 2 })">2</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">3</a></li>
+                    <li class="active"><a href="@Url.Action("Index", new { page = page })">4</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">5</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page + 1 })">Next</a></li>
+                </ul>
+            </div>
+        }
+             @if (page == 5)
+        {
+            <div style=" margin-left: 400px;">
+                <ul class="pagination">
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">Previous</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 4 })">1</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 3 })">2</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 2 })">3</a></li>
+                    <li class="waves-effect"><a href="@Url.Action("Index", new { page = page - 1 })">4</a></li>
+                    <li class="active"><a href="@Url.Action("Index", new { page = page  })">5</a></li>
+                    <li class="disabled"><a href="#">Next</a></li>
+                </ul>
+            </div>
+        }*@
 </div>
+
+@section Scripts {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script>
+        $('#District_ID').select2();
+        $('#Street_ID').select2();
+        $('#District_ID').on('change', function () {
+            $('#Street_ID').empty();
+            $.getJSON('/Home/GetStreet?Distric_id=' + $('#District_ID').val(),
+            function (json) {
+                $('#Street_ID').select2({ data: json });
+            });
+        });
+
+        $('#District_ID').select2();
+        $('#Ward_ID').select2();
+        $('#District_ID').on('change', function () {
+            $('#Ward_ID').empty();
+            $.getJSON('/Home/GetWard?Distric_id=' + $('#District_ID').val(),
+            function (json) {
+                $('#Ward_ID').select2({ data: json });
+            });
+        });
+    </script>
+}
+
+
