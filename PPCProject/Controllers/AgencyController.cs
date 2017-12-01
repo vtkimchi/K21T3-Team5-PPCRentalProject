@@ -20,7 +20,7 @@ namespace PPCProject.Controllers
             if (Session["UserID"] != null)
             {
                 idd = Session["UserID"].ToString();
-                var property = model.PROPERTies.Where(x => x.UserID == user_id).OrderByDescending(x => x.ID).ToList();
+                var property = model.PROPERTies.Where(x => x.UserID == user_id).OrderBy(x => x.ID).ToList();
                 return View(property);
             }
             else
@@ -45,7 +45,6 @@ namespace PPCProject.Controllers
                 {
                     Session["FullName"] = user.FullName;
                     Session["UserID"] = user.ID;
-
                     return RedirectToAction("Index", new { @user_id = user.ID });
                 }
             }
@@ -133,7 +132,7 @@ namespace PPCProject.Controllers
                     if (id > 0)
 
                     {
-                        return RedirectToAction("Index", "Agency");
+                        return RedirectToAction("Index", "Agency", new { @user_id = Session["UserID"] });
                     }
                     else
                     {
