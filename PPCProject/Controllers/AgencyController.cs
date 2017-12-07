@@ -20,7 +20,7 @@ namespace PPCProject.Controllers
             if (Session["UserID"] != null)
             {
                 idd = Session["UserID"].ToString();
-                var property = model.PROPERTies.Where(x => x.UserID == user_id).OrderBy(x => x.ID).ToList();
+                var property = model.PROPERTies.Where(x => x.UserID == user_id).OrderByDescending(x => x.ID).ToList();
                 return View(property);
             }
             else

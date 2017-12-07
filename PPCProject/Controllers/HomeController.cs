@@ -54,7 +54,7 @@ namespace PPCProject.Controllers
         {
             Function();
             List<object> ls = new List<object>();
-            var property = model.PROPERTies.ToList().OrderByDescending(x => x.ID); 
+            var property = model.PROPERTies.ToList().Where(x => x.Status_ID == 3).OrderByDescending(x => x.ID); 
             ViewBag.Page = page;
             return View(property);
         }
@@ -104,48 +104,50 @@ namespace PPCProject.Controllers
         }
 
         [HttpGet]
-        public ActionResult Search(string text, string bien1, string District_ID, string Street_ID, string bed, string bath)
+        public ActionResult Search(string text, string bien1, string District_ID, string Street_ID, int bed, int bath)
         {
             Function();
 
-            
-            if(string.IsNullOrEmpty(text))
+            var search = model.PROPERTies.Where(x => x.Status_ID == 3);
+
+            if (text == "")
             {
+
                 if (!string.IsNullOrEmpty(bien1))
                 {
-                    var search = model.PROPERTies.ToList().Where(x => x.PROPERTY_TYPE.Description.Contains(bien1));
-                    return View(search);
+                    search = model.PROPERTies.Where(x => x.PROPERTY_TYPE.Description.Equals(bien1));
+
                 }
-                else if (!string.IsNullOrEmpty(District_ID))
+                if (!string.IsNullOrEmpty(District_ID))
                 {
-                    var search1 = model.PROPERTies.ToList().Where(x => x.DISTRICT.DistrictName.Equals(District_ID) && x.STREET.StreetName.Equals(Street_ID));
-                    return View(search1);
+                    int Dis_id = int.Parse(District_ID);
+                    search = model.PROPERTies.Where(x => x.DISTRICT.ID == Dis_id);
+
                 }
-                else if (!string.IsNullOrEmpty(bed))
+                if (!string.IsNullOrEmpty(Street_ID))
                 {
-                    var search2 = model.PROPERTies.ToList().Where(x => x.BedRoom.ToString().Equals(bed));
-                    return View(search2);
+                    int Str_id = int.Parse(Street_ID);
+                    search = model.PROPERTies.Where(x => x.Street_ID == Str_id);
                 }
-                else if (!string.IsNullOrEmpty(bath))
+                if (bed != 0)
                 {
-                    var search3 = model.PROPERTies.ToList().Where(x => x.BathRoom.ToString().Equals(bath));
-                    return View(search3);
+                    search = model.PROPERTies.Where(x => x.BedRoom == bed);
+
                 }
-                else
+                if (bath != 0)
                 {
-                    var search8 = model.PROPERTies.ToList().Where(x => x.DISTRICT.DistrictName.Contains(District_ID) && x.STREET.StreetName.Contains(Street_ID) && x.PROPERTY_TYPE.Description.Contains(bien1) && x.BedRoom.ToString().Contains(bed) && x.BathRoom.ToString().Contains(bath));
-                    return View(search8);
+                    search = model.PROPERTies.Where(x => x.BathRoom == bath);
+
                 }
-                //var search = model.PROPERTies.ToList().Where(x => x.PROPERTY_TYPE.Description.Contains(bien1) || x.DISTRICT.DistrictName.Contains(bien2) || x.STREET.StreetName.Contains(street1) || x.BedRoom.ToString().Contains(bed1) || x.BathRoom.ToString().Contains(bath1));
-                //return View(search);
+
+                return View(search.ToList());                
             }
-            else 
+            else
             {
-                var search5 = model.PROPERTies.ToList().Where(x =>x.PROPERTY_TYPE.Description.Contains(text) ||x.PropertyName.Contains(text) || x.DISTRICT.DistrictName.Contains(text) || x.WARD.WardName.Contains(text) || x.STREET.StreetName.Contains(text)
+                var search5 = model.PROPERTies.ToList().Where(x => x.PROPERTY_TYPE.Description.Contains(text) || x.PropertyName.Contains(text) || x.DISTRICT.DistrictName.Contains(text) || x.WARD.WardName.Contains(text) || x.STREET.StreetName.Contains(text)
                 || x.BathRoom.ToString().Contains(text) || x.Area.Contains(text) || x.PROPERTY_TYPE.Description.Contains(text));
                 return View(search5);
             }          
-            
         }
 
         public JsonResult GetStreet(int Distric_id)
