@@ -140,13 +140,13 @@ namespace PPCProject.Controllers
 
                 }
 
-                return View(search.ToList());                
+                return View(search.ToList().Where(x => x.Status_ID == 3));                
             }
             else
             {
-                var search5 = model.PROPERTies.ToList().Where(x => x.PROPERTY_TYPE.Description.Contains(text) || x.PropertyName.Contains(text) || x.DISTRICT.DistrictName.Contains(text) || x.WARD.WardName.Contains(text) || x.STREET.StreetName.Contains(text)
+                search = model.PROPERTies.Where(x => x.PROPERTY_TYPE.Description.Contains(text) || x.PropertyName.Contains(text) || x.DISTRICT.DistrictName.Contains(text) || x.WARD.WardName.Contains(text) || x.STREET.StreetName.Contains(text)
                 || x.BathRoom.ToString().Contains(text) || x.Area.Contains(text) || x.PROPERTY_TYPE.Description.Contains(text));
-                return View(search5);
+                return View(search.ToList().Where(x => x.Status_ID == 3));
             }          
         }
 

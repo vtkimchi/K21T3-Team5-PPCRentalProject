@@ -44,12 +44,7 @@
 
     <div class="filter-form">
             <form id="advanced_search" role="search" action="@Url.Action("Search","Home")" name="search" method="get">
-                @*<div class="col-xs-2 ">
-                        <label>Country</label>
-                        <select class="show-menu-arrow selectpicker shape">
-                            <option value="vietnam">VietNam</option>
-                        </select>
-                    </div>*@
+                
                 <div class="col-xs-2">
                     <label>Type</label>
                     <div class="show-menu-arrow selectpicker">
@@ -61,12 +56,7 @@
                     <label>District</label>
                     @Html.DropDownList("District_ID", new SelectList(model.DISTRICTs, "ID", "DistrictName"), "Select District", new { @class = "form-control shape" })
                 </div>
-
-                @*<div class="col-xs-2">
-                    <label>Ward</label>
-                    @Html.DropDownList("Ward_ID", new SelectList(model.WARDs.Take(0), "ID", "WardName"), "Select Ward", new { @class = "form-control shape" })
-                </div>*@
-
+                              
                 <div class="col-xs-2">
                     <label>Street</label>
                     @Html.DropDownList("Street_ID", new SelectList(model.STREETs.Take(0), "ID", "StreetName"), "Select Street", new { @class = "form-control shape" })

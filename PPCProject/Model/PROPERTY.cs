@@ -18,6 +18,7 @@ namespace PPCProject.Model
         public PROPERTY()
         {
             this.PROPERTY_FEATURE = new HashSet<PROPERTY_FEATURE>();
+        
         }
     
         public int ID { get; set; }

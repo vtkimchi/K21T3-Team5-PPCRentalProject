@@ -17,10 +17,11 @@ namespace PPCProject.Controllers
         // GET: /Agency/
         public ActionResult Index(int? user_id)
         {
+
             if (Session["UserID"] != null)
             {
                 idd = Session["UserID"].ToString();
-                var property = model.PROPERTies.Where(x => x.UserID == user_id).OrderByDescending(x => x.ID).ToList();
+                var property = model.PROPERTies.OrderByDescending(x => x.ID).Where(x => x.UserID == user_id).ToList();
                 return View(property);
             }
             else
@@ -28,7 +29,7 @@ namespace PPCProject.Controllers
                 return RedirectToAction("Login");
             }
         }
-
+        
 
         [HttpGet]
         public ActionResult Login()
@@ -176,7 +177,7 @@ namespace PPCProject.Controllers
                     if (id > 0)
 
                     {
-                        return RedirectToAction("Index", "Agency");
+                        return RedirectToAction("Index", "Agency", new { @user_id = Session["UserID"] });
                     }
                     else
                     {
