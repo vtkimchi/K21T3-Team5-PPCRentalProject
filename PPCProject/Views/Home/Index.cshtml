@@ -212,13 +212,20 @@
 
 
     <script>
+        var data = {
+            id: null,
+            text: 'Select Street'
+        };
+
+        var newOption = new Option(data.text, data.id, false, true);
+
         $('#District_ID').select2();
         $('#Street_ID').select2();
         $('#District_ID').on('change', function () {
             $('#Street_ID').empty();
             $.getJSON('/Home/GetStreet?Distric_id=' + $('#District_ID').val(),
             function (json) {
-                $('#Street_ID').select2({ data: json });
+                $('#Street_ID').select2({ data: json }).append(newOption);
             });
         });
 
