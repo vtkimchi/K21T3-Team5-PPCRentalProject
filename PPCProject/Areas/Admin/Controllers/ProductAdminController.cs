@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using PPCProject.Model;
 using System.IO;
-
 namespace PPCProject.Areas.Admin.Controllers
 {
     public class ProductAdminController : Controller
@@ -15,8 +14,24 @@ namespace PPCProject.Areas.Admin.Controllers
         Team35Entities model = new Team35Entities();
         public ActionResult Index()
         {
-            var product = model.PROPERTies.OrderByDescending(x => x.ID).ToList();
-            return View(product);
+            if (Session["UserID"] != null)
+            {
+                if (int.Parse(Session["RoleID"].ToString()) == 2)
+                {
+                    var product = model.PROPERTies.OrderByDescending(x => x.ID).ToList();
+                    return View(product);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Agency", new { area = ""});
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Agency", new { area = "" });
+                
+            }
+            
         }
         [HttpGet]
         public ActionResult Edit(int id)

@@ -15,18 +15,29 @@ namespace PPCProject.Controllers
         Team35Entities model = new Team35Entities();
         //
         // GET: /Agency/
-        public ActionResult Index(int? user_id)
+        public ActionResult Index()
         {
 
             if (Session["UserID"] != null)
             {
-                idd = Session["UserID"].ToString();
-                var property = model.PROPERTies.OrderByDescending(x => x.ID).Where(x => x.UserID == user_id).ToList();
-                return View(property);
+                if (int.Parse(Session["RoleID"].ToString()) == 1)
+                {
+                    idd = Session["UserID"].ToString();
+                    int user_id = int.Parse(idd);
+                    var property = model.PROPERTies.OrderByDescending(x => x.ID).Where(x => x.UserID == user_id).ToList();
+                    return View(property);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Admin/ProductAdmin");
+                }
+                //idd = Session["UserID"].ToString();
+                //var property = model.PROPERTies.OrderByDescending(x => x.ID).Where(x => x.UserID == user_id).ToList();
+                //return View(property);
             }
             else
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Agency");
             }
         }
         
@@ -46,7 +57,8 @@ namespace PPCProject.Controllers
                 {
                     Session["FullName"] = user.FullName;
                     Session["UserID"] = user.ID;
-                    return RedirectToAction("Index", new { @user_id = user.ID });
+                    Session["RoleID"] = user.Role;
+                    return RedirectToAction("Index");
                 }
             }
             else
@@ -55,15 +67,15 @@ namespace PPCProject.Controllers
             }
             return View();
         }
-        public ActionResult Logout(int id)
+        public ActionResult Logout()
         {
-            var user = model.USERs.FirstOrDefault(x => x.ID == id);
+            var user = model.USERs;
             if (user != null)
             {
                 Session["FullName"] = null;
                 Session["UserID"] = null;
             }
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
         }
 
 

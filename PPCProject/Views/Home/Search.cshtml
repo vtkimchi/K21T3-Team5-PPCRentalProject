@@ -15,7 +15,7 @@
             <img class="img-rounded img-responsive" src="~/Images/IMG_1592-stamp.jpg" width="100%" />
         </div>
         <div class="item">
-            <img class="img-rounded img-responsive" src="~/Images/PIS_4622-Edit.jpg" width="100%" />
+            <img class="img-rounded img-responsive" src="~/Images/PIS3280-Edit-stamp.jpg" width="100%" />
         </div>
         <div class="item">
             <img class="img-rounded img-responsive" src="~/Images/PIS_6656-Edit-stamp.jpg" width="100%" />
@@ -44,7 +44,7 @@
 
     <div class="filter-form">
         <form id="advanced_search" role="search" action="@Url.Action("Search","Home")" name="search" method="get">
-            
+
             <div class="col-xs-2">
                 <label>Type</label>
                 <div class="show-menu-arrow selectpicker">
@@ -56,7 +56,7 @@
                 <label>District</label>
                 @Html.DropDownList("District_ID", new SelectList(model.DISTRICTs, "ID", "DistrictName"), "Select District", new { @class = "form-control shape" })
             </div>
-                       
+
             <div class="col-xs-2">
                 <label>Street</label>
                 @Html.DropDownList("Street_ID", new SelectList(model.STREETs.Take(0), "ID", "StreetName"), "Select Street", new { @class = "form-control shape" })
@@ -212,13 +212,20 @@
 
 
     <script>
+        var data = {
+            id: null,
+            text: 'Select Street'
+        };
+
+        var newOption = new Option(data.text, data.id, false, true);
+
         $('#District_ID').select2();
         $('#Street_ID').select2();
         $('#District_ID').on('change', function () {
             $('#Street_ID').empty();
             $.getJSON('/Home/GetStreet?Distric_id=' + $('#District_ID').val(),
             function (json) {
-                $('#Street_ID').select2({ data: json });
+                $('#Street_ID').select2({ data: json }).append(newOption);
             });
         });
 
