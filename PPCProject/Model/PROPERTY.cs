@@ -11,6 +11,7 @@ namespace PPCProject.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Web;
     
     public partial class PROPERTY
@@ -22,20 +23,41 @@ namespace PPCProject.Model
         }
     
         public int ID { get; set; }
+
+        [StringLength(100)]        
         public string PropertyName { get; set; }
+
+        [StringLength(200)]
         public string Avatar { get; set; }
+
+        [StringLength(200)]
         public string Images { get; set; }
+
         public Nullable<int> PropertyType_ID { get; set; }
+
+        [StringLength(500)]
         public string Content { get; set; }
+
         public Nullable<int> Street_ID { get; set; }
+
         public Nullable<int> Ward_ID { get; set; }
+
         public Nullable<int> District_ID { get; set; }
+
         public Nullable<int> Price { get; set; }
+
         public string UnitPrice { get; set; }
+
+        [StringLength(30)]
         public string Area { get; set; }
+
+        
         public Nullable<int> BedRoom { get; set; }
+        
         public Nullable<int> BathRoom { get; set; }
+
         public Nullable<int> PackingPlace { get; set; }
+
         public Nullable<int> UserID { get; set; }
         public Nullable<System.DateTime> Created_at { get; set; }
         public Nullable<System.DateTime> Create_post { get; set; }
