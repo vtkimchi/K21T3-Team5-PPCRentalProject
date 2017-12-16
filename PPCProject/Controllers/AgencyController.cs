@@ -18,19 +18,14 @@ namespace PPCProject.Controllers
         public ActionResult Index()
         {
 
-            if (Session["UserID"] != null)
+            if ((Session["UserID"] != null) && (int.Parse(Session["RoleID"].ToString()) == 1))
             {
-                if (int.Parse(Session["RoleID"].ToString()) == 1)
-                {
+               
                     idd = Session["UserID"].ToString();
                     int user_id = int.Parse(idd);
                     var property = model.PROPERTies.OrderByDescending(x => x.ID).Where(x => x.UserID == user_id).ToList();
                     return View(property);
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Admin/ProductAdmin");
-                }
+                
                 //idd = Session["UserID"].ToString();
                 //var property = model.PROPERTies.OrderByDescending(x => x.ID).Where(x => x.UserID == user_id).ToList();
                 //return View(property);
@@ -58,7 +53,15 @@ namespace PPCProject.Controllers
                     Session["FullName"] = user.FullName;
                     Session["UserID"] = user.ID;
                     Session["RoleID"] = user.Role;
-                    return RedirectToAction("Index");
+
+                    if (int.Parse(Session["RoleID"].ToString()) == 1)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "ProductAdmin", new { area = "Admin" });
+                    }
                 }
             }
             else

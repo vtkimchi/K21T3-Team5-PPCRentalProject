@@ -14,17 +14,12 @@ namespace PPCProject.Areas.Admin.Controllers
         Team35Entities model = new Team35Entities();
         public ActionResult Index()
         {
-            if (Session["UserID"] != null)
+            if ((Session["UserID"] != null) && (int.Parse(Session["RoleID"].ToString()) == 2))
             {
-                if (int.Parse(Session["RoleID"].ToString()) == 2)
-                {
+                
                     var product = model.PROPERTies.OrderByDescending(x => x.ID).ToList();
                     return View(product);
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Agency", new { area = ""});
-                }
+               
             }
             else
             {
