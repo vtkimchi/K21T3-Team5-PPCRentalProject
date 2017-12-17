@@ -11,7 +11,7 @@ namespace PPCProject.Areas.Admin.Controllers
     {
         //
         // GET: /Admin/ProductAdmin/
-        Team35Entities model = new Team35Entities();
+        team35Entities model = new team35Entities();
         public ActionResult Index()
         {
             if ((Session["UserID"] != null) && (int.Parse(Session["RoleID"].ToString()) == 2))

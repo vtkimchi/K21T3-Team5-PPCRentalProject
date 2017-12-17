@@ -9,7 +9,7 @@ namespace PPCProject.Controllers
 {
     public class DetailController : Controller
     {
-        Team35Entities model = new Team35Entities();
+        team35Entities model = new team35Entities();
         //
         // GET: /Detail/
         public ActionResult Detail(int id)

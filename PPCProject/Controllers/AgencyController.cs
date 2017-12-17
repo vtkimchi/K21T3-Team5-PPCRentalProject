@@ -12,7 +12,7 @@ namespace PPCProject.Controllers
     public class AgencyController : Controller
     {
         public static string idd ="";
-        Team35Entities model = new Team35Entities();
+        team35Entities model = new team35Entities();
         //
         // GET: /Agency/
         public ActionResult Index()

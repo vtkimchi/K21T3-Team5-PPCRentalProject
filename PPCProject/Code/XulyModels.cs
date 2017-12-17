@@ -17,7 +17,7 @@ namespace PPCProject.Code
 
     public class XulyModels
     {
-        Team35Entities db = new Team35Entities();
+        team35Entities db = new team35Entities();
         public long Insert(PROPERTY entytiy)
         {
             db.PROPERTies.Add(entytiy);

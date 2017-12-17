@@ -11,7 +11,7 @@ namespace PPCProject.Controllers
     public class HomeController : Controller
     {
         List<SelectListItem> type,district, ward, street;
-        Team35Entities model = new Team35Entities();
+        team35Entities model = new team35Entities();
         public void Function()
         {
         /*new List*/

@@ -12,13 +12,14 @@ namespace PPCProject.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class PROPERTY_FEATURE
+    public partial class ABOUT_US
     {
         public int ID { get; set; }
-        public int Property_ID { get; set; }
-        public int Feature_ID { get; set; }
+        public string Content { get; set; }
+        public string Images { get; set; }
+        public int Sale_ID { get; set; }
+        public Nullable<System.DateTime> Update_date { get; set; }
     
-        public virtual FEATURE FEATURE { get; set; }
-        public virtual PROPERTY PROPERTY { get; set; }
+        public virtual USER USER { get; set; }
     }
 }

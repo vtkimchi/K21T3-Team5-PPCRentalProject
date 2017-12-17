@@ -11,7 +11,7 @@ namespace PPCProject.Controllers
     {
         //
         // GET: /MyProfile/
-        Team35Entities tt = new Team35Entities();
+        team35Entities tt = new team35Entities();
         public ActionResult Index()
         {
             // var user = tt.USERs.Find(user_id);
