@@ -1,0 +1,72 @@
+﻿@model IEnumerable<PPCProject.Model.USER>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAgency.cshtml";
+}
+
+<h2 style="text-align: center">My Account</h2>
+
+@*<p>
+            @Html.ActionLink("Create New", "Create")
+    </p>*@
+<div class="col-md-12" style="background: url(/Images/AB.jpg) no-repeat; width:100%;margin: 0 auto; background-size:cover">
+    <div>
+        <div>
+            <br>
+            <div style="color:blue">
+                <b>@Html.DisplayNameFor(model => model.Email)</b>
+            </div><br>
+            @foreach (var item in Model)
+            {
+                <div>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </div><br>
+            }
+        </div><br>
+        <div>
+            <div style="color:blue">
+                <b>@Html.DisplayNameFor(model => model.FullName)</b>
+            </div><br>
+            @foreach (var item in Model)
+            {
+                <div>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </div><br>
+            }
+        </div><br>
+        <div>
+            <div style="color:blue">
+                <b>@Html.DisplayNameFor(model => model.Phone)</b>
+            </div><br>
+            @foreach (var item in Model)
+            {
+                <div>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </div><br>
+            }
+        </div><br>
+        <div>
+            <div style="color:blue">
+                <b>@Html.DisplayNameFor(model => model.Address)</b>
+            </div><br>
+            @foreach (var item in Model)
+            {
+                <div>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </div><br>
+            }
+        </div><br>
+        <div>
+            @foreach (var item in Model)
+            {
+                <div class="btn btn-default" style="margin-bottom: 10px;">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+

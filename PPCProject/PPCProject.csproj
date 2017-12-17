@@ -135,6 +135,7 @@
     <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\DetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MyProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,6 +212,7 @@
     <Content Include="IconImages\search.png" />
     <Content Include="IconImages\setting.png" />
     <Content Include="IconImages\task1.png" />
+    <Content Include="Images\AB.jpg" />
     <Content Include="Images\AvatarProjectNone.png" />
     <Content Include="Images\iconPlace.png" />
     <Content Include="Images\icon_area.png" />
@@ -312,6 +314,8 @@
     <Content Include="Views\Agency\Login.cshtml" />
     <Content Include="Views\Agency\Index.cshtml" />
     <Content Include="Views\Agency\Logout.cshtml" />
+    <Content Include="Views\MyProfile\Index.cshtml" />
+    <Content Include="Views\MyProfile\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
