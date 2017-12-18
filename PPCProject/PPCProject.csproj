@@ -136,6 +136,7 @@
     <Compile Include="Controllers\DetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyProfileController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -329,6 +330,7 @@
     <Content Include="Views\MyProfile\Index.cshtml" />
     <Content Include="Views\MyProfile\Edit.cshtml" />
     <EmbeddedResource Include="Views\Agency\Edit.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

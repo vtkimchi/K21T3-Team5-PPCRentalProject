@@ -316,7 +316,7 @@
                         </a>
                     </li>
                     <li class="active">
-                        <a href="~/Agency?user_id=@Session["UserID"]" class=""  >
+                        <a href="~/Agency?user_id=@Session["UserID"]" class="">
                             <img src="~/IconImages/placeholder.png" />
                             <span>MY PROPERTIES</span>
                         </a>
@@ -328,12 +328,18 @@
                         </a>
                     </li>
                     <li class="sub">
+                        <a class="" href="@Url.Action("ChangePassword","User" , new { area=""})">
+                            <img src="~/IconImages/add.png" />
+                            <span>CHANGE PASSSWORD</span>
+                        </a>
+                    </li>
+                    <li class="sub">
                         <a href="/Agency/Logout" class="">
                             <img src="~/IconImages/power.png" />
                             <span>LOG OUT</span>
                         </a>
                     </li>
-                  </ul>
+                </ul>
                 <!-- sidebar menu end-->
             </div>
         </aside>
