@@ -11,7 +11,7 @@ namespace PPCProject.Controllers
 {
     public class AgencyController : Controller
     {
-        public static string idd ="";
+        public static string idd = "";
         team35Entities model = new team35Entities();
         //
         // GET: /Agency/
@@ -20,12 +20,12 @@ namespace PPCProject.Controllers
 
             if ((Session["UserID"] != null) && (int.Parse(Session["RoleID"].ToString()) == 1))
             {
-               
-                    idd = Session["UserID"].ToString();
-                    int user_id = int.Parse(idd);
-                    var property = model.PROPERTies.OrderByDescending(x => x.ID).Where(x => x.UserID == user_id).ToList();
-                    return View(property);
-                
+
+                idd = Session["UserID"].ToString();
+                int user_id = int.Parse(idd);
+                var property = model.PROPERTies.OrderByDescending(x => x.ID).Where(x => x.UserID == user_id).ToList();
+                return View(property);
+
                 //idd = Session["UserID"].ToString();
                 //var property = model.PROPERTies.OrderByDescending(x => x.ID).Where(x => x.UserID == user_id).ToList();
                 //return View(property);
@@ -35,7 +35,7 @@ namespace PPCProject.Controllers
                 return RedirectToAction("Login", "Agency");
             }
         }
-        
+
 
         [HttpGet]
         public ActionResult Login()
@@ -89,7 +89,7 @@ namespace PPCProject.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PROPERTY pROPERTY, List<HttpPostedFileBase> files)
+        public ActionResult Create(PROPERTY pROPERTY, List<HttpPostedFileBase> files, string submit)
         {
             ListItem();
             var product = new PROPERTY();
@@ -118,7 +118,17 @@ namespace PPCProject.Controllers
 
                 pROPERTY.Created_at = DateTime.Parse(DateTime.Now.ToShortDateString());
                 pROPERTY.UserID = int.Parse(idd);
-                pROPERTY.Status_ID = 1;
+                pROPERTY.UnitPrice = "VND";
+                //set status post project
+                if (submit == "Post")
+                {
+                    pROPERTY.Status_ID = 1;
+                }
+                else if (submit == "Draf")
+                {
+                    pROPERTY.Status_ID = 2;
+                }
+
                 var model = new XulyModels();
                 if (ModelState.IsValid)
                 {
@@ -158,11 +168,22 @@ namespace PPCProject.Controllers
 
 
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
                 pROPERTY.Created_at = DateTime.Parse(DateTime.Now.ToShortDateString());
                 pROPERTY.UserID = int.Parse(idd);
-                pROPERTY.Status_ID = 1;
+
+                //set status post project
+                if (submit == "Post")
+                {
+                    pROPERTY.Status_ID = 1;
+                }
+                else if (submit == "Draf")
+                {
+                    pROPERTY.Status_ID = 2;
+                }
+
+
                 var model = new XulyModels();
                 if (ModelState.IsValid)
                 {
@@ -203,6 +224,87 @@ namespace PPCProject.Controllers
 
             return View();
         }
+        //hàm edit cho project ở trang thai luu nhap
+        public ActionResult Edit(int id, int StaId)
+        {
+            if (StaId == 2)
+            {
+                var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
+                ViewBag.Type = model.PROPERTY_TYPE.ToList();
+                ListItem();
+                return View(product);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Agency", new { userid = idd });
+            }
+
+        }
+
+
+
+
+
+        [HttpPost]
+        public ActionResult Edit(int id, PROPERTY p, string submit)
+        {
+            int ID = id;
+
+            ListItem();
+            var en = model.PROPERTies.Find(p.ID);
+
+            //single image
+            var PROPERTY = model.PROPERTies.FirstOrDefault(x => x.ID == id);
+            ViewBag.Type = model.PROPERTY_TYPE.ToList();
+            if (p.AvatarFile != null && p.AvatarFile.ContentLength > 0)
+            {
+                if (Path.GetExtension(p.AvatarFile.FileName).ToLower() == ".jpg"
+                    || Path.GetExtension(p.AvatarFile.FileName).ToLower() == ".png"
+                    || Path.GetExtension(p.AvatarFile.FileName).ToLower() == ".gif"
+                    || Path.GetExtension(p.AvatarFile.FileName).ToLower() == ".jpeg")
+                {
+                    string filename = Path.GetFileNameWithoutExtension(p.AvatarFile.FileName);
+                    string extention = Path.GetExtension(p.AvatarFile.FileName);
+
+                    filename = filename + DateTime.Now.ToString("yymmfff") + extention;
+                    p.Avatar = filename;
+
+                    filename = Path.Combine(Server.MapPath("~/Images"), filename);
+
+                    p.AvatarFile.SaveAs(filename);
+                    PROPERTY.Avatar = p.Avatar;
+                }
+            }
+
+            PROPERTY.ID = p.ID;
+            PROPERTY.PropertyName = p.PropertyName;
+            PROPERTY.PropertyType_ID = p.PropertyType_ID;
+            PROPERTY.Content = p.Content;
+            PROPERTY.Street_ID = p.Street_ID;
+            PROPERTY.Ward_ID = p.Ward_ID;
+            PROPERTY.District_ID = p.District_ID;
+            PROPERTY.Price = p.Price;
+            PROPERTY.Area = p.Area;
+            PROPERTY.BedRoom = p.BedRoom;
+            PROPERTY.BathRoom = p.BathRoom;
+            PROPERTY.PackingPlace = p.PackingPlace;
+            if (submit == "Post")
+            {
+                PROPERTY.Status_ID = 1;
+            }
+            else if (submit == "Draf")
+            {
+                PROPERTY.Status_ID = 2;
+            }
+
+            PROPERTY.Note = p.Note;
+            model.SaveChanges();
+            return RedirectToAction("Index", "Agency", new { userid = idd });
+
+
+
+        }
+
 
 
         public void ListItem()

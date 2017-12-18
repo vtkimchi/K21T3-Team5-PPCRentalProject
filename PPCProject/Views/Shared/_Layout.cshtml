@@ -35,8 +35,41 @@
                     <li>@Html.ActionLink("SEARCH", "About", "Home")</li>
                     <li>@Html.ActionLink("ABOUT US", "Contact", "Home")</li>
                     <li>@Html.ActionLink("POST", "Index", "Agency")</li>
-                    @*<li>@Html.ActionLink("LOGIN", "", "Agency")</li>*@
+                  
                     <li><a href="~/Admin/ProductAdmin/Index">ADMIN</a></li>
+                    @*//Login*@
+                   @if (Session["UserID"] == null)
+                   { 
+                    <li>@Html.ActionLink("LOGIN", "Login", "Agency")</li>
+                   }
+                   else
+                   {
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">
+                                <img alt="" src="img/avatar1_small.jpg">
+                            </span>
+                            <span class="username">@Session["FullName"]</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            @*<div class="log-arrow-up"></div>*@
+                            <li class="eborder-top">
+                                <a href="/MyProfile/Index/@Session["UserID"]"> My Profile</a>
+                            </li>
+                                @*<li>
+                                    <a href="~/Agency?user_id=@Session["UserID"]"> My Property</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Create","Agency")"> Add New Property</a>
+                                </li>*@
+                            <li>
+                                <a href="/Agency/Logout">Logout</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                   }
                 </ul>
             </div>
             <div class="backgrounheader">
