@@ -220,6 +220,7 @@
     <Content Include="IconImages\task1.png" />
     <Content Include="Images\AB.jpg" />
     <Content Include="Images\AvatarProjectNone.png" />
+    <Content Include="Images\diamond.jpg" />
     <Content Include="Images\iconPlace.png" />
     <Content Include="Images\icon_area.png" />
     <Content Include="Images\icon_bath.png" />
@@ -227,7 +228,11 @@
     <Content Include="Images\icon_money.png" />
     <Content Include="Images\IMG_1592-stamp.jpg" />
     <Content Include="Images\logoPPC.png" />
+    <Content Include="Images\maxbuilding.jpg" />
+    <Content Include="Images\maxbuilding2.jpg" />
+    <Content Include="Images\maxbuilding3.jpg" />
     <Content Include="Images\money.png" />
+    <Content Include="Images\ongnhom.jpg" />
     <Content Include="Images\PIS3280-Edit-stamp.jpg" />
     <Content Include="Images\PIS3611.jpg" />
     <Content Include="Images\PIS_6656-Edit-stamp.jpg" />
@@ -236,6 +241,7 @@
     <Content Include="Images\PIS_7389-Edit-stamp.jpg" />
     <Content Include="Images\PIS_7432-Edit-stamp.jpg" />
     <Content Include="Images\sunshine-benthanh-cityhome-10-stamp.jpg" />
+    <Content Include="Images\trophy.png" />
     <Content Include="Scripts\AgencyScripts\bootstrap.min.js" />
     <Content Include="Scripts\AgencyScripts\index.js" />
     <Content Include="Scripts\AgencyScripts\jquery.js" />
