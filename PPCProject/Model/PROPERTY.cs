@@ -11,7 +11,8 @@ namespace PPCProject.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class PROPERTY
     {
         public PROPERTY()
@@ -50,5 +51,16 @@ namespace PPCProject.Model
         public virtual USER USER { get; set; }
         public virtual USER USER1 { get; set; }
         public virtual WARD WARD { get; set; }
+        public string fname { get; set; }
+
+        public string lname { get; set; }
+
+        public string MoviePoster { get; set; }
+
+        public string Image_url { get; set; }
+
+        public string path { get; set; }
+        public HttpPostedFileBase AvatarFile { get; set; }
+        public IEnumerable<HttpPostedFileBase> ImageFile2 { get; set; }
     }
 }
