@@ -23,6 +23,7 @@ namespace PPCProject.Model
         public string CodeType { get; set; }
         public string Description { get; set; }
         public bool Status { get; set; }
+        public string Property_Type_ID { get; set; }
     
         public virtual ICollection<PROPERTY> PROPERTies { get; set; }
     }

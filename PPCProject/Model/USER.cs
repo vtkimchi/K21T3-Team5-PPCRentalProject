@@ -29,6 +29,7 @@ namespace PPCProject.Model
         public string Address { get; set; }
         public string Role { get; set; }
         public bool Status { get; set; }
+        public string User_ID { get; set; }
     
         public virtual ICollection<ABOUT_US> ABOUT_US { get; set; }
         public virtual ICollection<PROPERTY> PROPERTies { get; set; }

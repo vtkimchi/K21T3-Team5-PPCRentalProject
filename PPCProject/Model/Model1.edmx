@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="team35Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="team35Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ABOUT_US">
           <Key>
             <PropertyRef Name="ID" />
@@ -82,6 +82,7 @@
           <Property Name="CodeType" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Property_Type_ID" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="STREET">
           <Key>
@@ -114,6 +115,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Role" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="User_ID" Type="varchar" MaxLength="9" />
         </EntityType>
         <EntityType Name="WARD">
           <Key>
@@ -329,8 +331,7 @@
             <End Role="WARD" EntitySet="WARD" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="team35Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -428,6 +429,7 @@
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="PROPERTies" Relationship="Self.FK_PROPERTY_PROPERTY_TYPE" FromRole="PROPERTY_TYPE" ToRole="PROPERTY" />
+          <Property Name="Property_Type_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="STREET">
           <Key>
@@ -465,6 +467,7 @@
           <NavigationProperty Name="ABOUT_US" Relationship="Self.FK_ABOUT_US_USER" FromRole="USER" ToRole="ABOUT_US" />
           <NavigationProperty Name="PROPERTies" Relationship="Self.FK_PROPERTY_USER" FromRole="USER" ToRole="PROPERTY" />
           <NavigationProperty Name="PROPERTies1" Relationship="Self.FK_PROPERTY_USER1" FromRole="USER" ToRole="PROPERTY" />
+          <Property Name="User_ID" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="WARD">
           <Key>
@@ -766,6 +769,7 @@
           <EntitySetMapping Name="PROPERTY_TYPE">
             <EntityTypeMapping TypeName="team35Model.PROPERTY_TYPE">
               <MappingFragment StoreEntitySet="PROPERTY_TYPE">
+                <ScalarProperty Name="Property_Type_ID" ColumnName="Property_Type_ID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CodeType" ColumnName="CodeType" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -797,6 +801,7 @@
           <EntitySetMapping Name="USERs">
             <EntityTypeMapping TypeName="team35Model.USER">
               <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
