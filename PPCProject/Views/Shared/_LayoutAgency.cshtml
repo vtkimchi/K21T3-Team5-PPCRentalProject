@@ -275,19 +275,16 @@
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
                             <li class="eborder-top">
-                                <a href="/MyProfile/Index/@Session["UserID"]"><i class="icon_profile"></i> My Profile</a>
+                                <a href="/MyProfile/Index/@Session["UserID"]"> My Profile</a>
                             </li>
                             <li>
-                                <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
+                                <a href="~/Agency?user_id=@Session["UserID"]"> My Property</a>
                             </li>
                             <li>
-                                <a href="#"><i class="icon_clock_alt"></i> Timeline</a>
+                                <a href="@Url.Action("Create","Agency")"> Add New Property</a>
                             </li>
                             <li>
-                                <a href="#"><i class="icon_chat_alt"></i> Chats</a>
-                            </li>
-                            <li>
-                                <a href="/Agency/logout/@Session["UserID"]">Logout</a>
+                                <a href="/Agency/Logout">Logout</a>
                             </li>
                             <li>
                                 <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
@@ -313,7 +310,7 @@
                 </ul>*@
                 <ul class="sidebar-menu">
                     <li class="sub">
-                        <a class="" href="index.html">
+                        <a class="" href="/MyProfile/Index/@Session["UserID"]">
                             <img src="~/IconImages/setting.png" />
                             <span>MY PROFILE</span>
                         </a>
