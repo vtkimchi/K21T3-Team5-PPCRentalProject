@@ -36,7 +36,7 @@ namespace PPCProject.Controllers
                     userdetail.Password = newpassword;
                     model.SaveChanges();
                     TempData["changepassword"] = "Your password has been changed";
-                    return RedirectToAction("Index", "Home", new { area = "" });
+                    return RedirectToAction("Login", "Agency");
                 }
                 else
                 {
