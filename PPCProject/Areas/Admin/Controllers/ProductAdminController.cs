@@ -38,6 +38,7 @@ namespace PPCProject.Areas.Admin.Controllers
             ViewBag.district = model.DISTRICTs.OrderByDescending(x => x.ID).ToList();
             ViewBag.user = model.USERs.OrderByDescending(x => x.ID).ToList();
             ViewBag.status = model.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
+
             return View(product);
         }
         [HttpPost]
@@ -161,6 +162,9 @@ namespace PPCProject.Areas.Admin.Controllers
             return RedirectToAction("Index", "ProductAdmin");
         }
 
+      
+
+
         private string UpAva(PROPERTY p)
         {
             string filename = Path.GetFileNameWithoutExtension(p.AvatarFile.FileName);
@@ -243,12 +247,25 @@ namespace PPCProject.Areas.Admin.Controllers
             model.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+        // Details
         [HttpGet]
+       // /detail mutiImage
         public ActionResult Details(int id)
         {
-            var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
-            return View(product);
+            var pro = model.PROPERTies.FirstOrDefault(x => x.ID == id);
+            //ViewBag.Images = Directory.EnumerateFiles(Server.MapPath("~/Multilmages")).Select(fn => "~/Multilmages" + Path.GetFileName(fn));
+            ViewBag.features = model.PROPERTY_FEATURE.Where(x => x.Property_ID == id).ToList();
+            ViewBag.Countt = model.PROPERTY_FEATURE.Where(x => x.Property_ID == id).Count();
+            return View(pro);
         }
+
+        //public ActionResult Details(int id)
+        //{
+        //    var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
+        //    return View(product);
+        //}
 
         public JsonResult GetStreet(int Distric_id)
         {

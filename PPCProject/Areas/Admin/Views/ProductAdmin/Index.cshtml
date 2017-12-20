@@ -4,6 +4,10 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+@if (Session["UserID"] == null)
+{
+    Response.Redirect("~/Agency/Login");
+}
 
 <h2>Danh sách dự án</h2>
 

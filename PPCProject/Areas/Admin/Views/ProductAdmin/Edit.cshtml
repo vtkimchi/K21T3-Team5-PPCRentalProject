@@ -235,7 +235,7 @@
     <script>
         $('#District_ID').select2();
         $('#Street_ID').select2();
-        $('#District_ID').on('change', function () {
+        $('#District_ID').on('load', function () {
             $('#Street_ID').empty();
             $.getJSON('/ProductAdmin/GetStreet?Distric_id=' + $('#District_ID').val(),
             function (json) {

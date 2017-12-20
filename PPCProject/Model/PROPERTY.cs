@@ -62,5 +62,8 @@ namespace PPCProject.Model
         public string path { get; set; }
         public HttpPostedFileBase AvatarFile { get; set; }
         public IEnumerable<HttpPostedFileBase> ImageFile2 { get; set; }
+
+
+    public string[] listfeature { get; set; }
     }
 }

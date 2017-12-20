@@ -12,7 +12,7 @@ namespace PPCProject.Controllers
     public class AgencyController : Controller
     {
         public static string idd = "";
-        team35Entities model = new team35Entities();
+        team35Entities modeldb = new team35Entities();
         //
         // GET: /Agency/
         public ActionResult Index()
@@ -23,7 +23,7 @@ namespace PPCProject.Controllers
 
                 idd = Session["UserID"].ToString();
                 int user_id = int.Parse(idd);
-                var property = model.PROPERTies.OrderByDescending(x => x.ID).Where(x => x.UserID == user_id).ToList();
+                var property = modeldb.PROPERTies.OrderByDescending(x => x.ID).Where(x => x.UserID == user_id).ToList();
                 return View(property);
 
                 //idd = Session["UserID"].ToString();
@@ -45,7 +45,7 @@ namespace PPCProject.Controllers
         [HttpPost]
         public ActionResult Login(string email, string password)
         {
-            var user = model.USERs.FirstOrDefault(x => x.Email == email);
+            var user = modeldb.USERs.FirstOrDefault(x => x.Email == email);
             if (user != null)
             {
                 if (user.Password.Equals(password))
@@ -72,7 +72,7 @@ namespace PPCProject.Controllers
         }
         public ActionResult Logout()
         {
-            var user = model.USERs;
+            var user = modeldb.USERs;
             if (user != null)
             {
                 Session["FullName"] = null;
@@ -96,7 +96,7 @@ namespace PPCProject.Controllers
 
             try
             {
-
+                // xu ly Image
                 string filename = Path.GetFileNameWithoutExtension(pROPERTY.AvatarFile.FileName);
                 string extension = Path.GetExtension(pROPERTY.AvatarFile.FileName);
                 filename = filename + "checkcheck" + DateTime.Now.ToString("yymmssfff") + extension;
@@ -129,10 +129,28 @@ namespace PPCProject.Controllers
                     pROPERTY.Status_ID = 2;
                 }
 
+
+
                 var model = new XulyModels();
                 if (ModelState.IsValid)
                 {
+
                     long id = model.Insert(pROPERTY);
+                    
+                    
+                    //save feature
+                    PROPERTY_FEATURE pf = new PROPERTY_FEATURE();
+
+                    foreach (string x in pROPERTY.listfeature)
+                    {
+                        pf.Property_ID = (int)id;
+                        pf.Feature_ID = int.Parse(x);
+                        modeldb.PROPERTY_FEATURE.Add(pf);
+                        modeldb.SaveChanges();
+               
+                    }
+
+                    //save mutiImage
                     var path = "";
                     foreach (var item in files)
                     {
@@ -155,6 +173,8 @@ namespace PPCProject.Controllers
                             }
                         }
                     }
+
+                    // end save nhieu ảnh
                     if (id > 0)
 
                     {
@@ -188,6 +208,18 @@ namespace PPCProject.Controllers
                 if (ModelState.IsValid)
                 {
                     long id = model.Insert(pROPERTY);
+
+                    PROPERTY_FEATURE pf = new PROPERTY_FEATURE();
+
+                    foreach (string x in pROPERTY.listfeature)
+                    {
+                        pf.Property_ID = (int)id;
+                        pf.Feature_ID = int.Parse(x);
+                        modeldb.PROPERTY_FEATURE.Add(pf);
+                        modeldb.SaveChanges();
+
+                    }
+
                     var path = "";
                     foreach (var item in files)
                     {
@@ -229,8 +261,8 @@ namespace PPCProject.Controllers
         {
             if (StaId == 2)
             {
-                var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
-                ViewBag.Type = model.PROPERTY_TYPE.ToList();
+                var product = modeldb.PROPERTies.FirstOrDefault(x => x.ID == id);
+                ViewBag.Type = modeldb.PROPERTY_TYPE.ToList();
                 ListItem();
                 return View(product);
             }
@@ -251,11 +283,11 @@ namespace PPCProject.Controllers
             int ID = id;
 
             ListItem();
-            var en = model.PROPERTies.Find(p.ID);
+            var en = modeldb.PROPERTies.Find(p.ID);
 
             //single image
-            var PROPERTY = model.PROPERTies.FirstOrDefault(x => x.ID == id);
-            ViewBag.Type = model.PROPERTY_TYPE.ToList();
+            var PROPERTY = modeldb.PROPERTies.FirstOrDefault(x => x.ID == id);
+            ViewBag.Type = modeldb.PROPERTY_TYPE.ToList();
             if (p.AvatarFile != null && p.AvatarFile.ContentLength > 0)
             {
                 if (Path.GetExtension(p.AvatarFile.FileName).ToLower() == ".jpg"
@@ -298,7 +330,7 @@ namespace PPCProject.Controllers
             }
 
             PROPERTY.Note = p.Note;
-            model.SaveChanges();
+            modeldb.SaveChanges();
             return RedirectToAction("Index", "Agency", new { userid = idd });
 
 
@@ -309,23 +341,24 @@ namespace PPCProject.Controllers
 
         public void ListItem()
         {
-            ViewBag.property_type = model.PROPERTY_TYPE.ToList();
-            ViewBag.ward = model.WARDs.OrderByDescending(x => x.ID).ToList();
-            ViewBag.street = model.STREETs.OrderByDescending(x => x.ID).ToList();
-            ViewBag.district = model.DISTRICTs.OrderByDescending(x => x.ID).ToList();
-            ViewBag.user = model.USERs.OrderByDescending(x => x.ID).ToList();
-            ViewBag.status = model.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
+            ViewBag.property_type = modeldb.PROPERTY_TYPE.ToList();
+            ViewBag.feature = modeldb.FEATUREs.ToList();
+            ViewBag.ward = modeldb.WARDs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.street = modeldb.STREETs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.district = modeldb.DISTRICTs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.user = modeldb.USERs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.status = modeldb.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
 
         }
 
         public JsonResult GetStreet(int Distric_id)
         {
-            return Json(model.STREETs.Where(x => x.District_ID == Distric_id)
+            return Json(modeldb.STREETs.Where(x => x.District_ID == Distric_id)
                 .Select(x => new { id = x.ID, text = x.StreetName }).ToList(), JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetWard(int Distric_id)
         {
-            return Json(model.WARDs.Where(x => x.District_ID == Distric_id)
+            return Json(modeldb.WARDs.Where(x => x.District_ID == Distric_id)
                 .Select(x => new { id = x.ID, text = x.WardName }).ToList(), JsonRequestBehavior.AllowGet);
         }
     }

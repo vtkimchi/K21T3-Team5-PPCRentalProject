@@ -9,6 +9,7 @@
 <h2 style="text-align: center">CREATE PROPERTY</h2>
 @{ 
     
+
 }
 
 @using (Html.BeginForm("Create", "Agency", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -43,12 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-
-                <div>
-
                     <input type="file" name="files" multiple />
-
-                </div>
             </div>
         </div>
 
@@ -65,6 +61,14 @@
             <div class="col-md-4">
                 @Html.TextAreaFor(model => model.Content, new { @class = "form-control required", @cols = 55, @rows = 10 })
                 @Html.ValidationMessageFor(model => model.Content)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PROPERTY_FEATURE, "Feature", new { @class = "control-label col-md-2" })
+            <div class=" col-md-4">
+                @Html.DropDownList("listfeature", new SelectList(ViewBag.feature,"ID", "FeatureName"), new { @class = "form-control",@muLtiple ="true" })
+                @Html.ValidationMessageFor(model => model.PropertyType_ID)
             </div>
         </div>
 

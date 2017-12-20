@@ -48,7 +48,7 @@
                 @Html.DisplayFor(model => model.Content)
             </p>
             <div class="row">
-                <div class="col-xs-6">
+                <div class="col-xs-4">
                     <p>
                         <h3 style="background-color: #E6E6E6; padding: 4px; text-align: center">Address</h3>
                     </p>
@@ -63,8 +63,9 @@
                         District: @Html.DisplayFor(model => model.DISTRICT.DistrictName)
                     </p>
                 </div>
+           
 
-                <div class="col-xs-6">
+                <div class="col-xs-4">
                     <p>
                         <h3 style="background-color: #E6E6E6; padding: 4px; text-align: center">Details</h3>
                     </p>
@@ -82,6 +83,29 @@
                     </p>
 
                 </div>
+
+
+                <div class="col-xs-4">
+                    <p>
+                        <h3 style="background-color: #E6E6E6; padding: 4px; text-align: center">Feature</h3>
+                    </p>
+                   
+                    <p>
+                            @{  foreach (var item in Model.PROPERTY_FEATURE)
+                                {
+                                    if (item.Property_ID == Model.ID)
+                                    {
+                                        @item.FEATURE.FeatureName <br />
+
+                                    }
+                                }
+
+                            }
+                    </p>
+                </div>
+
+
+
             </div>
             <div>
                 <p>
