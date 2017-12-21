@@ -33,8 +33,8 @@ namespace PPCProject.Areas.Admin.Controllers
         {
             var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
             ViewBag.property_type = model.PROPERTY_TYPE.OrderByDescending(x => x.ID).ToList();
-            ViewBag.ward = model.WARDs.OrderByDescending(x => x.ID).ToList();
-            ViewBag.street = model.STREETs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.ward = model.WARDs.Where(w => w.District_ID == product.District_ID).OrderByDescending(x => x.ID).ToList();
+            ViewBag.street = model.STREETs.Where(s => s.District_ID == product.District_ID).OrderByDescending(x => x.ID).ToList();
             ViewBag.district = model.DISTRICTs.OrderByDescending(x => x.ID).ToList();
             ViewBag.user = model.USERs.OrderByDescending(x => x.ID).ToList();
             ViewBag.status = model.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
@@ -44,7 +44,7 @@ namespace PPCProject.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(PROPERTY p)
         {
-            ListAll();
+            //ListAll();
             // Images
             var entity = model.PROPERTies.Find(p.ID);
 
@@ -67,9 +67,9 @@ namespace PPCProject.Areas.Admin.Controllers
                 entity.PropertyType_ID = p.PropertyType_ID;
                 entity.Content = p.Content;
                 //entity.Street_ID = p.Street_ID;
-                //entity.Ward_ID = p.Ward_ID;
-                //entity.District_ID = p.District_ID;
-                entity.UnitPrice = p.UnitPrice;
+                entity.Ward_ID = p.Ward_ID;
+                entity.District_ID = p.District_ID;
+                entity.UnitPrice = "VND";
                 entity.Area = p.Area;
                 entity.BedRoom = p.BedRoom;
                 entity.BathRoom = p.BathRoom;
@@ -91,9 +91,9 @@ namespace PPCProject.Areas.Admin.Controllers
                      entity.PropertyType_ID = p.PropertyType_ID;
                      entity.Content = p.Content;
                      //entity.Street_ID = p.Street_ID;
-                     //entity.Ward_ID = p.Ward_ID;
+                     entity.Ward_ID = p.Ward_ID;
                      //entity.District_ID = p.District_ID;
-                     entity.UnitPrice = p.UnitPrice;
+                     entity.UnitPrice = "VND";
                      entity.Area = p.Area;
                      entity.BedRoom = p.BedRoom;
                      entity.BathRoom = p.BathRoom;
@@ -117,7 +117,7 @@ namespace PPCProject.Areas.Admin.Controllers
                          //entity.Street_ID = p.Street_ID;
                          //entity.Ward_ID = p.Ward_ID;
                          //entity.District_ID = p.District_ID;
-                         entity.UnitPrice = p.UnitPrice;
+                         entity.UnitPrice = "VND";
                          entity.Area = p.Area;
                          entity.BedRoom = p.BedRoom;
                          entity.BathRoom = p.BathRoom;
@@ -138,7 +138,7 @@ namespace PPCProject.Areas.Admin.Controllers
                          //entity.Street_ID = p.Street_ID;
                          //entity.Ward_ID = p.Ward_ID;
                          //entity.District_ID = p.District_ID;
-                         entity.UnitPrice = p.UnitPrice;
+                         entity.UnitPrice = "VND";
                          entity.Area = p.Area;
                          entity.BedRoom = p.BedRoom;
                          entity.BathRoom = p.BathRoom;
@@ -229,21 +229,6 @@ namespace PPCProject.Areas.Admin.Controllers
             product.Create_post = p.Create_post;
             product.Updated_at = p.Updated_at;
             model.PROPERTies.Add(product);
-            model.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        [HttpGet]
-        public ActionResult Delete(int id) 
-        {
-            var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
-            return View(product);
-        }
-        [HttpPost]
-        [ActionName("Delete")] 
-        public ActionResult DeleteConfirm(int id)
-        {
-            var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
-            model.PROPERTies.Remove(product);
             model.SaveChanges();
             return RedirectToAction("Index");
         }

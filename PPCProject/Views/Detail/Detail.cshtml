@@ -13,7 +13,7 @@
                 <div class="col-sm-4" style="margin-top: 10px">
                     <h2 style=" font-size: large; color: red">
                         <img src="~/Images/icon_money.png" />
-                        @Html.DisplayFor(model => model.Price) @Html.DisplayFor(model => model.UnitPrice)
+                        @Html.DisplayFor(model => model.Price) VND
                         </  h2>
                 </div>
             </div>
@@ -125,16 +125,16 @@
                 <div class="row">
                     <div class="col-xs-6">
                         <p>
-                            @Html.DisplayNameFor(model => model.PROJECT_STATUS.Status_Name): @Html.DisplayFor(model => model.PROJECT_STATUS.Status_Name)
+                            @Html.DisplayName("Status"): @Html.DisplayFor(model => model.PROJECT_STATUS.Status_Name)
                         </p>
                         <p>
-                            @Html.DisplayNameFor(model => model.Created_at): @Html.DisplayFor(model => model.Created_at)
+                            @Html.DisplayName("Date Create"): @Html.DisplayFor(model => model.Created_at)
                         </p>
-                        <p>
+                        @*<p>
                             @Html.DisplayNameFor(model => model.Create_post): @Html.DisplayFor(model => model.Create_post)
-                        </p>
+                        </p>*@
                         <p>
-                            @Html.DisplayNameFor(model => model.Updated_at): @Html.DisplayFor(model => model.Updated_at)
+                            @Html.DisplayName("Date Updated"): @Html.DisplayFor(model => model.Updated_at)
                         </p>
                         <p>
                             @Html.DisplayNameFor(model => model.Note): @Html.DisplayFor(model => model.Note)
@@ -147,6 +147,12 @@
                         </p>
                         <p>
                             @Html.DisplayNameFor(model => model.USER.Email): @Html.DisplayFor(model => model.USER.Email)
+                        </p>
+                        <p>
+                            @Html.DisplayNameFor(model => model.USER.Phone): @Html.DisplayFor(model => model.USER.Phone)
+                        </p>
+                        <p>
+                            @Html.DisplayNameFor(model => model.USER.Address): @Html.DisplayFor(model => model.USER.Address)
                         </p>
                         @*<p>
                             @Html.DisplayNameFor(model => model.USER1.Email): @Html.DisplayFor(model => model.USER1.Email)

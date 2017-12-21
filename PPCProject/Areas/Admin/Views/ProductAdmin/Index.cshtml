@@ -33,7 +33,7 @@
                         <th>BedRoom</th>
                         <th>BathRoom</th>
                         <th>Created at</th>
-                        <th>Created post</th>
+                        @*<th>Created post</th>*@
                         <th>Updated at</th>
                         <th>Action</th>
                     </tr>
@@ -52,13 +52,17 @@
         <td>@item.BedRoom</td>
         <td>@item.BathRoom</td>
         <td>@item.Created_at</td>
-        <td>@item.Create_post</td>
+        @*<td>@item.Create_post</td>*@
         <td>@item.Updated_at</td>
         <td>
+            <div class="btn-group">
+                <a id="btnEditDraf" class="btn btn-primary" @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                <a class="btn btn-success" @Html.ActionLink("Details", "Details" , new { id=item.ID })
+            </div>
 
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) 
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) | 
+            @Html.ActionLink("Details", "Details", new { id = item.ID })*@ 
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
 
         </td>
     </tr>

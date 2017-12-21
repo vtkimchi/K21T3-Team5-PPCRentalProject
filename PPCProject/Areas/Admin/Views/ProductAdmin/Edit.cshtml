@@ -67,14 +67,14 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.WARD.WardName, "Ward", new { @class = "control-label col-md-2 " })
                 <div class="col-md-10">
-                    @Html.DropDownList("Ward_ID", new SelectList(db.WARDs.Take(0), "ID", "WardName"), "Select Ward")
+                    @Html.DropDownList("Ward_ID", new SelectList((List<WARD>)ViewBag.ward, "ID", "WardName"), "Select Ward")
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.STREET.StreetName, "Street", new { @class = "control-label col-md-2 " })
                 <div class="col-md-10">
-                    @Html.DropDownList("Street_ID", new SelectList(db.STREETs.Take(0), "ID", "StreetName"), "Select Street")
+                    @Html.DropDownList("Street_ID", new SelectList((List<STREET>)ViewBag.street, "ID", "StreetName"), "Select Street")
                 </div>
             </div>
 

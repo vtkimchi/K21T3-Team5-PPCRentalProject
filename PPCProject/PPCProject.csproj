@@ -259,7 +259,6 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\ProductAdmin\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductAdmin\Delete.cshtml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\dataTables.bootstrap4.js" />

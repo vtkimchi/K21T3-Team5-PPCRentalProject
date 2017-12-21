@@ -41,13 +41,15 @@ namespace PPCProject.Controllers
                 else
                 {
                     ModelState.AddModelError("confirmerror", "ConfirmPassword is wrong");
+                    return View(userdetail);
                 }
             }
             else
             {
                 ModelState.AddModelError("passworderror", "Password is wrong");
+                return View(userdetail);
             }
-            return View();
+            
         }
     }
 }

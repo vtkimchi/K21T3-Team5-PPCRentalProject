@@ -42,13 +42,13 @@
 <div class=" wow bounceInRight ">
     <p class ="filterbox">SEARCH</p>
 
-    <div class="filter-form">
+    <div class="filter-form" style="width: 90%">
             <form id="advanced_search" role="search" action="@Url.Action("Search","Home")" name="search" method="get">
                 
                 <div class="col-xs-2">
                     <label>Type</label>
                     <div class="show-menu-arrow selectpicker">
-                        @Html.DropDownList("bien1", (IEnumerable<SelectListItem>)ViewData["LoaiDA"],"All Type", new { @class = "shape" })
+                        @Html.DropDownList("bien1", (IEnumerable<SelectListItem>)ViewData["LoaiDA"], "All Type", new { @class = "shape" })
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                     @Html.DropDownList("Street_ID", new SelectList(model.STREETs.Take(0), "ID", "StreetName"), "Select Street", new { @class = "form-control shape" })
                 </div>
                
-                <div class="col-xs-2 ">
+                @*<div class="col-xs-2 ">
                     <label>Bedrooms</label>
                     <select class="show-menu-arrow selectpicker shape" name="bed">
                         <option value="0">Select Bedrooms</option>
@@ -81,14 +81,14 @@
                         <option value="3">3</option>
                         <option value="4">4</option>
                     </select>
-                </div>
+                </div>*@
                
                 <div class="col-xs-2">
                     <label>Key Word</label>
-                    <input type="text" class="form-control shape-text" style="width: 200px" placeholder="Type Keyword" name="text" />
+                    <input type="text" class="form-control shape-text" style="width: 150%" placeholder="Type Keyword" name="text" />
                 </div>
-                <div class="col-xs-6">
-                    <button type="submit" class="btn btn-info shape-button" style="margin-left: 450px;">SEARCH PROPERTY</button>
+                <div class="col-xs-2">
+                    <button type="submit" class="btn btn-info shape-button" style="margin-left: 70%; margin-bottom: 20%">SEARCH PROPERTY</button>
                 </div>
             </form>
     </div>
@@ -107,7 +107,7 @@
                     <img src="/Images/@item.Avatar" alt="@item.PropertyName" style="width: 350px; height: 232px">
                     <div class="caption">
                         <h3>@item.PropertyName</h3>
-                        <p style="color: red"><img src="~/Images/icon_money.png"/> @item.Price @item.UnitPrice</p>
+                        <p style="color: red"><img src="~/Images/icon_money.png"/> @item.Price VND</p>
                         <p><img src="~/Images/iconPlace.png" />@item.STREET.StreetName, @item.WARD.WardName,@item.DISTRICT.DistrictName</p>
                         <p>@item.PROPERTY_TYPE.Description</p>
                         @{

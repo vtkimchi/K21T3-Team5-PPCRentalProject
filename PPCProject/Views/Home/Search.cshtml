@@ -62,26 +62,26 @@
                 @Html.DropDownList("Street_ID", new SelectList(model.STREETs.Take(0), "ID", "StreetName"), "Select Street", new { @class = "form-control shape" })
             </div>
 
-            <div class="col-xs-2 ">
-                <label>Bedrooms</label>
-                <select class="show-menu-arrow selectpicker shape" name="bed">
-                    <option value="0">Select Bedrooms</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-            </div>
-            <div class="col-xs-2 ">
-                <label>Baths</label>
-                <select class="show-menu-arrow selectpicker shape" name="bath">
-                    <option value="0">Select Baths</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-            </div>
+            @*<div class="col-xs-2 ">
+                    <label>Bedrooms</label>
+                    <select class="show-menu-arrow selectpicker shape" name="bed">
+                        <option value="0">Select Bedrooms</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <div class="col-xs-2 ">
+                    <label>Baths</label>
+                    <select class="show-menu-arrow selectpicker shape" name="bath">
+                        <option value="0">Select Baths</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>*@
 
             <div class="col-xs-2">
                 <label>Key Word</label>
@@ -107,7 +107,7 @@
                     <img src="/Images/@item.Avatar" alt="@item.PropertyName" style="width: 350px; height: 232px">
                     <div class="caption">
                         <h3>@item.PropertyName</h3>
-                        <p style="color: red"><img src="~/Images/icon_money.png" /> @item.Price @item.UnitPrice</p>
+                        <p style="color: red"><img src="~/Images/icon_money.png" /> @item.Price VND</p>
                         <p><img src="~/Images/iconPlace.png" />@item.STREET.StreetName, @item.WARD.WardName,@item.DISTRICT.DistrictName</p>
                         <p>@item.PROPERTY_TYPE.Description</p>
                         @{

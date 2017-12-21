@@ -24,7 +24,7 @@
                         <th>Avatar</th>
                         <th>Property Type</th>
                         <th>Price</th>
-                        <th>Unit Price</th>
+                        @*<th>Unit Price</th>*@
                         <th>District</th>
                         <th>Area</th>   
                         <th>Status</th>
@@ -40,8 +40,8 @@
                             <td><img src="@Url.Content("~/Images/"+item.Avatar)" width="100px"></td>
                             @*<td><img src="/Images/@item.Avatar"  width="100px"></td>*@
                             <td>@item.PROPERTY_TYPE.CodeType</td>
-                            <td>@item.Price</td>
-                            <td>@item.UnitPrice</td>
+                            <td>@item.Price VND</td> 
+                            @*<td>@item.UnitPrice</td>*@
                             <td>@item.DISTRICT.DistrictName</td>
                             <td>@item.Area</td>
                             <td>@item.PROJECT_STATUS.Status_Name</td>
@@ -54,7 +54,7 @@
                             <td>
                                 <div class="btn-group">
                                     <a id="btnEditDraf" class="btn btn-primary" href="~/Agency/Edit/@item.ID?StaId=@item.Status_ID">Edit</a>
-                                    <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
+                                    <a class="btn btn-success" href="/Detail/Detail/@item.ID">Detail</a>
                                     @*<a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>*@
                                 </div>
                             </td>
