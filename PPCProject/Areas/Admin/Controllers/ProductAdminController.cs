@@ -255,7 +255,7 @@ namespace PPCProject.Areas.Admin.Controllers
         public ActionResult Details(int id)
         {
             var pro = model.PROPERTies.FirstOrDefault(x => x.ID == id);
-            //ViewBag.Images = Directory.EnumerateFiles(Server.MapPath("~/Multilmages")).Select(fn => "~/Multilmages" + Path.GetFileName(fn));
+            ViewBag.Imagess = Directory.EnumerateFiles(Server.MapPath("~/MultiImages")).Select(fn => "~/MultiImages/" + Path.GetFileName(fn));
             ViewBag.features = model.PROPERTY_FEATURE.Where(x => x.Property_ID == id).ToList();
             ViewBag.Countt = model.PROPERTY_FEATURE.Where(x => x.Property_ID == id).Count();
             return View(pro);

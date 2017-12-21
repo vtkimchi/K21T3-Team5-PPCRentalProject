@@ -35,7 +35,7 @@
             <img src="/Images/@Model.Avatar" style="width: 500px; height: 300px" />
         </p>
 
-        <p>
+        @*<p>
             @if (Model.Images != null)
             {
                 string[] chuoi = Model.Images.Split(',');
@@ -44,7 +44,21 @@
                     <img src="~/Images/@chuoi[i]" width="100px" alt="@Model.Images" />
                 }
             }
-        </p>
+        </p>*@
+
+
+        @*//image*@
+        @{ 
+            foreach (var image in (IEnumerable<string>)ViewBag.Imagess)
+            {
+                if (image.Contains(Model.ID.ToString()))
+                {
+                    <img src="@Url.Content(image)" width="100px">
+                }
+            }
+        }
+
+
 
         <p>
             @Html.DisplayFor(model => model.Content)
@@ -139,9 +153,9 @@
                     <p>
                         @Html.DisplayNameFor(model => model.USER.Email): @Html.DisplayFor(model => model.USER.Email)
                     </p>
-                    <p>
+                    @*<p>
                         @Html.DisplayNameFor(model => model.USER1.Email): @Html.DisplayFor(model => model.USER1.Email)
-                    </p>
+                    </p>*@
                 </div>
             </div>
         </div>
