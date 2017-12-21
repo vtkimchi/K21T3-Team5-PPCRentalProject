@@ -11,12 +11,13 @@ namespace PPCProject.Areas.Admin.Controllers
     {
         //
         // GET: /Admin/ProductAdmin/
+        public static string idSale = "";
         team35Entities model = new team35Entities();
         public ActionResult Index()
         {
             if ((Session["UserID"] != null) && (int.Parse(Session["RoleID"].ToString()) == 2))
             {
-                
+                idSale = Session["UserID"].ToString();
                     var product = model.PROPERTies.OrderByDescending(x => x.ID).ToList();
                     return View(product);
                
@@ -34,7 +35,7 @@ namespace PPCProject.Areas.Admin.Controllers
             var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
             ViewBag.property_type = model.PROPERTY_TYPE.OrderByDescending(x => x.ID).ToList();
             ViewBag.ward = model.WARDs.Where(w => w.District_ID == product.District_ID).OrderByDescending(x => x.ID).ToList();
-            ViewBag.street = model.STREETs.Where(s => s.District_ID == product.District_ID).OrderByDescending(x => x.ID).ToList();
+            ViewBag.street = model.STREETs.Where(w => w.District_ID == product.District_ID).OrderByDescending(x => x.ID).ToList();
             ViewBag.district = model.DISTRICTs.OrderByDescending(x => x.ID).ToList();
             ViewBag.user = model.USERs.OrderByDescending(x => x.ID).ToList();
             ViewBag.status = model.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
@@ -50,15 +51,6 @@ namespace PPCProject.Areas.Admin.Controllers
 
              try
              {
-               
-                // string filename = Path.GetFileNameWithoutExtension(p.AvatarFile.FileName);
-                // string extension = Path.GetExtension(p.AvatarFile.FileName);
-                // filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                // p.Images = filename;
-                // string s = p.Images;
-                // filename = Path.Combine(Server.MapPath("~/Images"), filename);
-                //p.AvatarFile.SaveAs(filename);
-                // entity.Images = p.Images;
                 string i = UpIma(p);
                 string s = UpAva(p);
                 entity.Images = i;
@@ -66,7 +58,7 @@ namespace PPCProject.Areas.Admin.Controllers
                 entity.PropertyName = p.PropertyName;
                 entity.PropertyType_ID = p.PropertyType_ID;
                 entity.Content = p.Content;
-                //entity.Street_ID = p.Street_ID;
+                entity.Street_ID = p.Street_ID;
                 entity.Ward_ID = p.Ward_ID;
                 entity.District_ID = p.District_ID;
                 entity.UnitPrice = "VND";
@@ -74,11 +66,10 @@ namespace PPCProject.Areas.Admin.Controllers
                 entity.BedRoom = p.BedRoom;
                 entity.BathRoom = p.BathRoom;
                 entity.PackingPlace = p.PackingPlace;
-                entity.UserID = p.UserID;
                 entity.Status_ID = p.Status_ID;
                 entity.Note = p.Note;
                 entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
-                //entity.Sale_ID = p.Sale_ID;
+                entity.Sale_ID = int.Parse(idSale);
                 model.SaveChanges();
              }
              catch(Exception)
@@ -90,19 +81,18 @@ namespace PPCProject.Areas.Admin.Controllers
                      entity.PropertyName = p.PropertyName;
                      entity.PropertyType_ID = p.PropertyType_ID;
                      entity.Content = p.Content;
-                     //entity.Street_ID = p.Street_ID;
+                     entity.Street_ID = p.Street_ID;
                      entity.Ward_ID = p.Ward_ID;
-                     //entity.District_ID = p.District_ID;
+                     entity.District_ID = p.District_ID;
                      entity.UnitPrice = "VND";
                      entity.Area = p.Area;
                      entity.BedRoom = p.BedRoom;
                      entity.BathRoom = p.BathRoom;
                      entity.PackingPlace = p.PackingPlace;
-                     entity.UserID = p.UserID;
                      entity.Status_ID = p.Status_ID;
                      entity.Note = p.Note;
                      entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
-                     //entity.Sale_ID = p.Sale_ID;
+                     entity.Sale_ID = int.Parse(idSale);
                      model.SaveChanges();
                  }
                  catch(Exception)
@@ -114,19 +104,18 @@ namespace PPCProject.Areas.Admin.Controllers
                          entity.PropertyName = p.PropertyName;
                          entity.PropertyType_ID = p.PropertyType_ID;
                          entity.Content = p.Content;
-                         //entity.Street_ID = p.Street_ID;
-                         //entity.Ward_ID = p.Ward_ID;
-                         //entity.District_ID = p.District_ID;
+                         entity.Street_ID = p.Street_ID;
+                         entity.Ward_ID = p.Ward_ID;
+                         entity.District_ID = p.District_ID;
                          entity.UnitPrice = "VND";
                          entity.Area = p.Area;
                          entity.BedRoom = p.BedRoom;
                          entity.BathRoom = p.BathRoom;
                          entity.PackingPlace = p.PackingPlace;
-                         entity.UserID = p.UserID;
                          entity.Status_ID = p.Status_ID;
                          entity.Note = p.Note;
                          entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
-                         //entity.Sale_ID = p.Sale_ID;
+                         entity.Sale_ID = int.Parse(idSale);
                          model.SaveChanges();
                      }
                      catch(Exception)
@@ -135,19 +124,18 @@ namespace PPCProject.Areas.Admin.Controllers
                          entity.PropertyName = p.PropertyName;
                          entity.PropertyType_ID = p.PropertyType_ID;
                          entity.Content = p.Content;
-                         //entity.Street_ID = p.Street_ID;
-                         //entity.Ward_ID = p.Ward_ID;
-                         //entity.District_ID = p.District_ID;
+                         entity.Street_ID = p.Street_ID;
+                         entity.Ward_ID = p.Ward_ID;
+                         entity.District_ID = p.District_ID;
                          entity.UnitPrice = "VND";
                          entity.Area = p.Area;
                          entity.BedRoom = p.BedRoom;
                          entity.BathRoom = p.BathRoom;
                          entity.PackingPlace = p.PackingPlace;
-                         entity.UserID = p.UserID;
                          entity.Status_ID = p.Status_ID;
                          entity.Note = p.Note;
                          entity.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
-                         //entity.Sale_ID = p.Sale_ID;
+                         entity.Sale_ID = int.Parse(idSale);
                          model.SaveChanges();
                      }
                     
